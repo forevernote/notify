@@ -1,6 +1,8 @@
 const express = require('express');
 const jsonParser = require('body-parser').json();
 const mongoose = require('mongoose');
+const basicHTTP = require(__dirname + '/../lib/basic-http');
+const authCheck = require(__dirname + '/../lib/check-token');
 
 const User = require(__dirname + '/../models/user');
 
@@ -41,8 +43,41 @@ authRouter.post('/register', jsonParser, (req, res) => {
       }
       res.status(200).json({
         token: data.generateToken(),
-        data: data
+        user: data
       })
     });
   });
 });
+
+// User Login
+authRouter.get('/login', basicHTTP, (req, res) => {
+  // Check DB for user
+  User.findOne({'authentication.email' : req.basicHTTP.email}, (err, user) => {
+    console.log(req.basicHTTP.email);
+    console.log(req.basicHTTP.password);
+    // Check for error
+    if(err) {
+      return res.status(401).json({
+        msg: 'Error finding user'
+      })
+    }
+    // Check for null user
+    if(!user) {
+      return res.status(401).json({
+        msg: 'User does not exist'
+      })
+    }
+    // Compare user password
+    if(!user.comparePassword(req.basicHTTP.password)) {
+      return res.status(401).json({
+        msg: 'Invalid username or password'
+      })
+    }
+    // Authenticate User, respond with token and user data
+    res.status(200).json({
+      user: user,
+      token: user.generateToken()
+    });
+
+  })
+})
