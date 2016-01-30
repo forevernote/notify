@@ -1,0 +1,40 @@
+{
+  "name": "notify",
+  "version": "1.0.0",
+  "description": "A note-taking, calendar, and online journal all rolled into one.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samheutmaker/notify.git"
+  },
+  "keywords": [
+    "journal",
+    "map"
+  ],
+  "author": "samheutmaker@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samheutmaker/notify/issues"
+  },
+  "homepage": "https://github.com/samheutmaker/notify#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4",
+    "jsonwebtoken": "^5.5.4",
+    "mongoose": "^4.3.7",
+    "node-geocoder": "^3.6.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^1.0.0",
+    "gulp": "^3.9.0",
+    "gulp-eslint": "^1.1.1",
+    "gulp-sass": "^2.1.1",
+    "mocha": "^2.4.5",
+    "nodemon": "^1.8.1"
+  }
+}
