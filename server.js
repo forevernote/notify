@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000;
 
 var app = express();
 
+app.use(express.static(__dirname + '/www'));
 
 mongoose.connect(
   'mongodb://notifyadmin:codefellows401@apollo.modulusmongo.net:27017/G8ynygim'
