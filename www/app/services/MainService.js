@@ -1,12 +1,19 @@
 angular.module('MainService', [])
 
-.service('Auth', ['$http', function($http){
-    this.login = function(data){
-        return $http.post('/auth/login', data);
-    }
-    this.register = function(data){
-    	return $http.post('/auth/register', data);
-    }
+.service('Auth', ['$http', function($http) {
+  this.login = function(headerData) {
+    console.log(headerData);
+    return $http({
+      methods: 'GET',
+      url: '/auth/login',
+      headers: {
+        authorization: 'Basic ' + headerData
+      }
+    });
+  };
+  this.register = function(data) {
+    return $http.post('/auth/register', data);
+  };
 
 }]);
 
