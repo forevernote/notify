@@ -1,7 +1,9 @@
-<div>This is the login page</div>
-<div>
-  <form>
-    <input type="text" name="email" ng-model="login.email" placeholder="Email">
-    <input type="password" name="password" ng-model="login.password" placeholder="Password">
-    <button ng-click="loginUser()"> Login </button>
-  </form>
+<h1>This is the login page</h1>
+  <div role="tabpanel" class="tab-pane" id="login-tab">
+    <form>
+      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" ng-model="login.email">
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="login.password">
+      <button type="button" class="btn btn-info" ng-click="loginUser()">Login</button>
+    <form>
+  </div>
+</div>
