@@ -1,0 +1,34 @@
+html, body {
+  height: 100%;
+  padding: 0px;
+  margin: 0px; }
+
+.nav-bar {
+  height: 60px;
+  width: 100%;
+  position: absolute;
+  display: block;
+  color: white;
+  background-color: #009ADF; }
+  .nav-bar .logo {
+    left: 100px;
+    position: absolute;
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 10px; }
+  .nav-bar ul {
+    list-style: none;
+    position: absolute;
+    right: 100px; }
+    .nav-bar ul li {
+      float: left;
+      position: relative;
+      margin: 0px 10px 0px 10px; }
+
+.page-container {
+  top: 60px;
+  position: absolute;
+  height: calc(100% - 60px);
+  width: 100%;
+  background-color: lightgrey; }
