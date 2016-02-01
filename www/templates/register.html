@@ -1,9 +1,8 @@
-<h1>This is the register page</h1>
-  <div role="tabpanel" class="tab-pane active" id="signup-tab">
-    <form>
-      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" ng-model="register.email">
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="register.password">
-      <button type="button" class="btn btn-info" ng-click="registerUser()">Sign-up</button>
-    </form>
-  </div>
+<div>
+  <form>
+    <input type="text" placeholder="Email" name="email" ng-model="register.email">
+    <br />
+    <input type="password" placeholder="Password" name="password" ng-model="register.password">
+    <button ng-click="registerUser()">Register</button
+  </form>
 </div>
