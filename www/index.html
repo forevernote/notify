@@ -5,6 +5,12 @@
   <meta name="viewport" content="initial-scale=1.0, width=device-width" />
   <title>Notify</title>
 
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
   <!--Resources-->
     <script type="text/javascript" src="lib/angular/angular.min.js"></script>
     <script type="text/javascript" src="lib/angular-route/angular-route.min.js"></script>
@@ -18,18 +24,28 @@
 
 <base href="/">
 
+
 </head>
 <body ng-app="notify">
 
   <h1>
     This is our home page
   </h1>
-  <ul>
-    <li><a href="#/login"> Login </a></li>
-    <li><a href="#/register"> Register</a></li>
-  </ul>
+  <div class="modal-body">
 
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#/register" aria-controls="signup-tab" role="tab" data-toggle="tab">Create an account</a></li>
+    <li role="presentation"><a href="#/login" aria-controls="login-tab" role="tab" data-toggle="tab">Login</a></li>
+  </ul>
+</div>
   <div ng-view></div>
+
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 </body>
 </html>
