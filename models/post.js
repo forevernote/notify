@@ -11,12 +11,12 @@ const geocodeOptions = {
 };
 
 // Create geocoder
-const geocoder = require('node-geocoder')(geocodeOptions.geocoderProvider, geocodeOptions.httpAdapter, extra);
+const geocoder = require('node-geocoder')(geocodeOptions.geocoderProvider, geocodeOptions.httpAdapter, geocodeOptions.extra);
 
 
 const postSchema = mongoose.Schema({
   title: String,
-  createdOn: new Date(),
+  createdOn: Date,
   author_id: String,
   expires: Date,
   content:{
