@@ -43,6 +43,16 @@ angular.module('MainController', [])
     $scope.newPost = {};
     $scope.updatePost = {};
 
+
+    $scope.interfaceIsOpen = false;
+
+    $scope.newPostControls = {
+      interfaceIsOpen: false,
+      togglePostInterface: function() {
+        this.interfaceIsOpen = !this.interfaceIsOpen;
+      }
+    };
+
     $scope.sendPost = function() {
       Post.createPost($scope.newPost).then(function(data) {
         console.log(data);

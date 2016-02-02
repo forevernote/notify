@@ -60,33 +60,31 @@ html, body {
         top: 0px;
         left: 0px;
 
-
-        .user-image{
-        	position: relative;
-        	height: 150px;
-        	width: 150px;
-        	border-radius: 50%;
-        	border: 1px solid black;
-        	margin: 0 auto;
-        	background-color: #FFFFFFF;
-        	top: 25px;
+        .user-image {
+            position: relative;
+            height: 150px;
+            width: 150px;
+            border-radius: 50%;
+            border: 1px solid black;
+            margin: 0 auto;
+            background-color: #FFFFFFF;
+            top: 25px;
         }
 
-        .user-controls{
-        	height: 150px;
-        	width: auto;
-        	position: absolute;
-        	right: 10px;
+        .user-controls {
+            height: 150px;
+            width: auto;
+            position: absolute;
+            right: 10px;
+            list-style: none;
+            top: 0px;
+            top: 10px;
 
-        	list-style: none;
-        	top: 0px;
-        	top: 10px;
-
-        	.user-control-button{
-        		font-size: 18px;
-        		margin: 10px 10px 10px 10px;
-        		color: black;
-        	}
+            .user-control-button {
+                font-size: 18px;
+                margin: 10px 10px 10px 10px;
+                color: black;
+            }
         }
     }
 
@@ -100,11 +98,11 @@ html, body {
         left: 500px;
 
         .post-control-button-container {
-			position: relative;
-			width: 640px;
-			height: auto;
-			margin: 0 auto;
-			top: 110px;
+            position: relative;
+            width: 640px;
+            height: auto;
+            margin: 0 auto;
+            top: 110px;
 
             .button-list {
                 width: 100%;
@@ -123,7 +121,10 @@ html, body {
                     text-align: center;
                     font-size: 20px;
                     color: white;
-                    
+
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -145,22 +146,28 @@ html, body {
         color: black;
         top: 200px;
         left: 500px;
-         background-color: #FFFFFFF;
+        background-color: #FFFFFFF;
         height: calc(100% - 200px);
     }
 }
 
+.new-post-interface {
+    height: 90%;
+    width: 90%;
+    position: absolute;
+    background-color: #bdc3c7;
+    border: 2px solid black;
+    left: 5%;
+    top: 5%;
+    z-index: 500000000;
+    border-radius: 10px;
 
+    .closeInterface {
+        font-size: 32px;
+        margin: 15px 20px 0px 20px;
 
-.new-post-interface{
-	height: 90%;
-	width: 90%;
-	position: absolute;
-	background-color: #bdc3c7;
-	border: 2px solid black;
-	left: 5%;
-	top: 5%;
-	z-index: 500000000;
-	border-radius: 10px;
-	display: none;
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
