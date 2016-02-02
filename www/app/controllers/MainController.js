@@ -29,7 +29,6 @@ angular.module('MainController', [])
       $scope.authString = $scope.login.email + ':' + $scope.login.password;
 
       Auth.login(btoa($scope.authString)).then(function(res) {
-        console.log(res);
         // if the token exists, store it in session storage and redirect to account page
         if (res.data.token) {
           $window.sessionStorage.token = res.data.token;
@@ -39,7 +38,15 @@ angular.module('MainController', [])
     }
   })
   .controller('AccountController', function($scope, Post) {
-    Post.get().then(function(data) {
-      console.log(data);
-    });
+
+    $scope.allPosts = {};
+
+    Post.getPost().then(function(res) {
+      $scope.allPosts = res.data.posts;
+    })
   });
+
+
+
+
+

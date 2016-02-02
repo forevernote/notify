@@ -5,7 +5,6 @@ angular.module('notify', ['ngRoute', 'MainController', 'MainService'])
 .run (function($rootScope, $location, $window) {
 	$rootScope.$on('$routeChangeStart', function (event, next) {
 		var userAuthenticated = $window.sessionStorage.token; // Check if the user is logged in
-		console.log(next);
 		// check if user is authenticated and trying to access secure page
 		if (userAuthenticated && next.isLogin) {
 				/* You can save the user's location to take him back to the same page after he has logged-in */

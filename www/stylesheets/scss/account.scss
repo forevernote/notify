@@ -43,6 +43,26 @@ html, body{
 	height: calc(100% - #{$nav-bar-height});
 	width: 100%;
 	background-color: lightgrey;
+
+
+	.post-container{
+		width: 500px;
+		position: relative;
+		height: calc(100% - 200px);
+		top: 200px;
+		background-color: #FFFFFF;
+
+		.post-preview{
+			position: relative;
+			width: 100%;
+			background-color: lightgrey;
+			border-bottom: 1px solid black;
+			color: black;
+			height: 100px;
+
+		}
+
+	}
 	
 }
 

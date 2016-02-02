@@ -32,3 +32,16 @@ html, body {
   height: calc(100% - 60px);
   width: 100%;
   background-color: lightgrey; }
+  .page-container .post-container {
+    width: 500px;
+    position: relative;
+    height: calc(100% - 200px);
+    top: 200px;
+    background-color: #FFFFFF; }
+    .page-container .post-container .post-preview {
+      position: relative;
+      width: 100%;
+      background-color: lightgrey;
+      border-bottom: 1px solid black;
+      color: black;
+      height: 100px; }

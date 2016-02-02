@@ -1,4 +1,12 @@
 <div class="page-container">
-		
-	page container
+	<div class="post-container">
+		<div class="post-preview" ng-repeat="post in allPosts">
+			<div class="post-preview-title">
+				{{post.title}}
+			</div>
+			<div class="post-preview-date">
+				{{post.createdOn}}
+			</div>
+		</div>
+	</div>		
 </div>
