@@ -1,7 +1,7 @@
 <div class="page-container">
 	<!-- User info -->
 	<div class="user-info">
-	
+		
 		<div class="user-image"></div>
 		<ul class="user-controls">
 			<li class="user-control-button">Account Settings</li>
@@ -9,48 +9,54 @@
 			<li class="user-control-button">Account Settings</li>
 			<li class="user-control-button">Account Settings</li>
 		</ul>
-
 	</div>
-
 	<!-- Post Viewer Controls -->
 	<div class="post-controls">
-	Post Control
+		Post Control
 		<div class="post-control-button-container">
-				<ul class="button-list">
-					<li ng-click="newPostControls.togglePostInterface()" class="post-control-button" >New Post</li>
-					<li ng-click="" class="post-control-button">New Post</li>
-					<li ng-click="" class="post-control-button">New Post</li>
-					<li ng-click="" class="post-control-button">New Post</li>
-				</ul>
-
+			<ul class="button-list">
+				<li ng-click="newPostControls.togglePostInterface()" class="post-control-button" >New Post</li>
+				<li ng-click="" class="post-control-button">New Post</li>
+				<li ng-click="" class="post-control-button">New Post</li>
+				<li ng-click="" class="post-control-button">New Post</li>
+			</ul>
 		</div>
 	</div>
-
-		<!-- Post Preview View -->
+	<!-- Post Preview View -->
 	<div class="post-preview-container">
-	Post Preview Viewer
-
-		<div class="post-preview" ng-repeat="post in allPosts">
-			<div class="post-preview-title">
-				{{post.title}}
-			</div>
-			<div class="post-preview-date">
-				{{post.createdOn}}
+		<div class="post-preview-inside">
+			<div class="post-preview"  ng-repeat="post in allPosts | filter:{ createdOn:  createdOn}">
+				<div class="post-preview-title">
+					{{post.title}}
+				</div>
+				<div class="post-preview-date">
+					{{post.createdOn}}
+				</div>
 			</div>
 		</div>
 	</div>
-
-		<!-- Post Viewer -->
+	<!-- Post Viewer -->
 	<div class="post-viewer">
 		post view
 	</div>
 </div>
-
 <div ng-show="newPostControls.interfaceIsOpen" class="new-post-interface">
-	<div class="closeInterface" ng-click="newPostControls.togglePostInterface()">
-		 &times;
+	<div class="new-post-interface-title">Create A New Post</div>
+	<div class="new-post-form">
+		<div class="new-post-title" ng-model="newPostControls.newPost.title" placeholder="Title"contenteditable>
+			
+		</div>
+		<div class="new-post-main-text" ng-model="newPostControls.newPost.content.text" contenteditable > </div>
 	</div>
-
-
-
+	<div class="closeInterface" ng-click="newPostControls.togglePostInterface()">&times;</div>
+	<div class="new-post-controls">
+		<div class="new-post-button" ng-click="newPostControls.clearPost()">
+			CLEAR
+		</div>
+		<div class="new-post-button" ng-click="newPostControls.sendPost()">
+			ENTER
+		</div>
+		
+		
+	</div>
 </div>

@@ -10,6 +10,7 @@ html, body {
     padding: 0px;
     margin: 0px;
     font-family: clean;
+    overflow: hidden;
 }
 
 .nav-bar {
@@ -113,7 +114,7 @@ html, body {
                 .post-control-button {
                     margin: 10px;
                     width: 140px;
-                    height: 40px;
+                    height: 50px;
                     float: left;
                     background-color: #009ADF;
                     border-radius: 2px;
@@ -134,15 +135,36 @@ html, body {
         width: 500px;
         top: 200px;
         left: 0px;
-        position: absolute;
         height: calc(100% - 200px);
         background-color: #ecf0f1;
+        overflow: hidden;
+        position: absolute;
+
+        .post-preview-inside {
+            width: 103%;
+            height: 100%;
+            overflow: auto;
+            position: absolute;
+            padding-right: -15px;
+
+            .post-preview {
+                height: 100px;
+                width: 100%;
+                position: relative;
+                background-color: white;
+                border-bottom: 1px solid black;
+                padding: 10px 0px 0px 10px;
+
+                .post-preview-title {
+                    font-size: 26px;
+                }
+            }
+        }
     }
 
     .post-viewer {
         position: absolute;
         width: calc(100% - 500px);
-        border-bottom: 1px solid black;
         color: black;
         top: 200px;
         left: 500px;
@@ -156,18 +178,99 @@ html, body {
     width: 90%;
     position: absolute;
     background-color: #bdc3c7;
-    border: 2px solid black;
     left: 5%;
     top: 5%;
     z-index: 500000000;
     border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 
     .closeInterface {
+        position: absolute;
         font-size: 32px;
         margin: 15px 20px 0px 20px;
+        z-index: 99999999;
 
         &:hover {
             cursor: pointer;
+        }
+    }
+
+    .new-post-interface-title {
+        font-size: 32px;
+        color: white;
+        margin: 20px 100px 0px 100px;
+        position: absolute;
+    }
+
+    .new-post-form {
+        position: absolute;
+        width: 50%;
+        padding-left: 90px;
+        height: auto;
+        left: 0px;
+        top: 100px;
+
+        .sudo-input {
+            background-color: #FFFFFF;
+            position: relative;
+            min-width: 100px;
+            min-height: 20px;
+            margin: 10px;
+            border-radius: 5px;
+            padding: 10px;
+
+            &:focus {
+                border: 0px;
+                outline: 0px;
+            }
+
+            // border: 1px solid rgba(0,0,0, 0.4);
+       
+        }
+
+        .new-post-title {
+            @extend .sudo-input;
+
+            font-size: 24px;
+        }
+
+        .new-post-main-text {
+            @extend .sudo-input;
+
+            font-size: 20px;
+            height: 400px;
+        }
+    }
+
+    .new-post-controls {
+        position: relative;
+        margin: 0 auto;
+        height: auto;
+        width: 325px;
+        z-index: 500000000;
+        top: 80%;
+
+        .new-post-button {
+            margin: 10px;
+            width: 140px;
+            height: 50px;
+            float: left;
+            background-color: #009ADF;
+            border-radius: 2px;
+            padding-top: 10px;
+            text-align: center;
+            font-size: 20px;
+            color: white;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &:active {
+                background-color: darken(#009ADF, 10%);
+            }
         }
     }
 }
