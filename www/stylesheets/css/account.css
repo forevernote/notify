@@ -98,6 +98,8 @@ html, body {
           text-align: center;
           font-size: 20px;
           color: white; }
+          .page-container .post-controls .post-control-button-container .button-list .post-control-button:hover {
+            cursor: pointer; }
   .page-container .post-preview-container {
     width: 500px;
     top: 200px;
@@ -124,5 +126,9 @@ html, body {
   left: 5%;
   top: 5%;
   z-index: 500000000;
-  border-radius: 10px;
-  display: none; }
+  border-radius: 10px; }
+  .new-post-interface .closeInterface {
+    font-size: 32px;
+    margin: 15px 20px 0px 20px; }
+    .new-post-interface .closeInterface:hover {
+      cursor: pointer; }

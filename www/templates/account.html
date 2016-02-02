@@ -17,7 +17,7 @@
 	Post Control
 		<div class="post-control-button-container">
 				<ul class="button-list">
-					<li ng-click="" class="post-control-button" ng-click="newPost.createNewPost()">New Post</li>
+					<li ng-click="newPostControls.togglePostInterface()" class="post-control-button" >New Post</li>
 					<li ng-click="" class="post-control-button">New Post</li>
 					<li ng-click="" class="post-control-button">New Post</li>
 					<li ng-click="" class="post-control-button">New Post</li>
@@ -46,8 +46,11 @@
 	</div>
 </div>
 
-<div class="new-post-interface">
-	Create a new post
+<div ng-show="newPostControls.interfaceIsOpen" class="new-post-interface">
+	<div class="closeInterface" ng-click="newPostControls.togglePostInterface()">
+		 &times;
+	</div>
+
 
 
 </div>
