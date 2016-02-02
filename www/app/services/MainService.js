@@ -37,4 +37,7 @@ angular.module('MainService', [])
   this.getPost = function() {
     return $http.get('/user/posts');
   };
+  this.createPost = function(newPost) {
+    return $http.post('/user/new', newPost);
+  }
 }]);

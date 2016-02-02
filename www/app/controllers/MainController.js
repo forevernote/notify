@@ -40,13 +40,15 @@ angular.module('MainController', [])
   .controller('AccountController', function($scope, Post) {
 
     $scope.allPosts = {};
+    $scope.newPost = {};
+
+    $scope.sendPost = function() {
+      Post.createPost($scope.newPost).then(function(data) {
+        console.log(data);
+      });
+    };
 
     Post.getPost().then(function(res) {
       $scope.allPosts = res.data.posts;
-    })
+    });
   });
-
-
-
-
-
