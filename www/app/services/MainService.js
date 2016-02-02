@@ -19,7 +19,6 @@ angular.module('MainService', [])
 })
 .service('Auth', ['$http', function($http) {
   this.login = function(headerData) {
-    console.log(headerData);
     return $http({
       methods: 'GET',
       url: '/auth/login',
@@ -32,9 +31,10 @@ angular.module('MainService', [])
     return $http.post('/auth/register', data);
   };
 
+
 }])
 .service('Post', ['$http', function($http){
-  this.get = function(){
-    return $http.get('/users/posts');
-  }
+  this.getPost = function() {
+    return $http.get('/user/posts');
+  };
 }]);

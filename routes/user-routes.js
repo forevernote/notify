@@ -9,9 +9,22 @@ const Post = require(__dirname + '/../models/post');
 
 var userRouter = module.exports = exports = express.Router();
 
+
 userRouter.get('/posts', authCheck, (req, res) => {
-  // if we pass authentication, return response
-  res.status(200).json({
-    msg: 'Authenticated successfully'
-  });
+	Post.find({author_id: req.user._id}, (err, data) => {
+		if(err) {
+			return res.status(500).json({
+				msg: 'Error finding posts'
+			})
+		} 
+
+		res.status(200).json({
+			msg: 'All post retrieved',
+			posts: data
+		});
+	});
+});
+
+userRouter.post('/new', authCheck, jsonParser, (req, res) => {
+	
 })
