@@ -1,5 +1,35 @@
 <div class="page-container">
-	<div class="post-container">
+	<!-- User info -->
+	<div class="user-info">
+	
+		<div class="user-image"></div>
+		<ul class="user-controls">
+			<li class="user-control-button">Account Settings</li>
+			<li class="user-control-button">Account Settings</li>
+			<li class="user-control-button">Account Settings</li>
+			<li class="user-control-button">Account Settings</li>
+		</ul>
+
+	</div>
+
+	<!-- Post Viewer Controls -->
+	<div class="post-controls">
+	Post Control
+		<div class="post-control-button-container">
+				<ul class="button-list">
+					<li ng-click="" class="post-control-button" ng-click="newPost.createNewPost()">New Post</li>
+					<li ng-click="" class="post-control-button">New Post</li>
+					<li ng-click="" class="post-control-button">New Post</li>
+					<li ng-click="" class="post-control-button">New Post</li>
+				</ul>
+
+		</div>
+	</div>
+
+		<!-- Post Preview View -->
+	<div class="post-preview-container">
+	Post Preview Viewer
+
 		<div class="post-preview" ng-repeat="post in allPosts">
 			<div class="post-preview-title">
 				{{post.title}}
@@ -8,5 +38,16 @@
 				{{post.createdOn}}
 			</div>
 		</div>
-	</div>		
+	</div>
+
+		<!-- Post Viewer -->
+	<div class="post-viewer">
+		post view
+	</div>
+</div>
+
+<div class="new-post-interface">
+	Create a new post
+
+
 </div>
