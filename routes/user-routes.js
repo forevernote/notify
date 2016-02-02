@@ -41,3 +41,18 @@ userRouter.post('/new', authCheck, jsonParser, (req, res) => {
 		});
 	});
 });
+
+userRouter.put('/post/:id', authCheck, jsonParser, (req, res) => {
+	var updatePost = req.body;
+	delete updatePost._id;
+	Post.update({_id: req.params.id}, updatePost, (err) => {
+		if (err) {
+			return res.status(500).json({
+				msg: 'Error updating post'
+			})
+		}
+	  res.status(200).json({
+			msg: 'Post updated'
+		});
+	});
+});

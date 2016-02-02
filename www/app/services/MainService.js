@@ -39,5 +39,8 @@ angular.module('MainService', [])
   };
   this.createPost = function(newPost) {
     return $http.post('/user/new', newPost);
-  }
+  };
+  this.updatePost = function(updatePost) {
+    return $http.put('/user/:id', updatePost);
+  };
 }]);
