@@ -13,8 +13,10 @@ mongoose.connect(
 );
 
 var authRoutes = require(__dirname + '/routes/auth-routes');
+var userRoutes = require(__dirname + '/routes/user-routes');
 
 app.use('/auth', authRoutes);
+app.use('/user', userRoutes);
 
 app.listen(PORT, () => {
   console.log('Server up on port ' + PORT);
