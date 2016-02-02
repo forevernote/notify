@@ -34,13 +34,21 @@ angular.module('MainService', [])
 
 }])
 .service('Post', ['$http', function($http){
+  var baseUri = '/user';
   this.getPost = function() {
-    return $http.get('/user/posts');
+    var uri = baseUri + '/posts';
+    return $http.get(uri);
   };
   this.createPost = function(newPost) {
-    return $http.post('/user/new', newPost);
+    var uri = baseUri + '/new';
+    return $http.post(uri, newPost);
   };
   this.updatePost = function(updatePost) {
-    return $http.put('/user/:id', updatePost);
+    var uri = baseUri + '/' + updatePost._id;
+    return $http.put(uri, updatePost);
+  };
+  this.deletePost = function(deletePost) {
+    var uri = baseUri + '/' + deletePost._id;
+    return $http.delete(uri);
   };
 }]);

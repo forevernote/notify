@@ -56,3 +56,19 @@ userRouter.put('/post/:id', authCheck, jsonParser, (req, res) => {
 		});
 	});
 });
+
+userRouter.delete('/posts/:id', authCheck, (req, res)) => {
+	Post.remove({_id: req.params.id}, (err) => {
+		if (err) {
+			return res.status(500).json({
+				msg: 'Error deleting post'
+			})
+		}
+		res.status(200).json({
+			msg: 'Post deleted'
+		});
+	});
+});
+
+
+
