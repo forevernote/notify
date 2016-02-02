@@ -41,6 +41,7 @@ angular.module('MainController', [])
 
     $scope.allPosts = {};
     $scope.newPost = {};
+    $scope.updatePost = {};
 
     $scope.sendPost = function() {
       Post.createPost($scope.newPost).then(function(data) {
@@ -48,6 +49,11 @@ angular.module('MainController', [])
       });
     };
 
+    $scope.editPost = function() {
+      Post.updatePost($scope.updatePost).then(function(data) {
+        console.log(data);
+      });
+    };
     Post.getPost().then(function(res) {
       $scope.allPosts = res.data.posts;
     });
