@@ -6,7 +6,8 @@ html, body {
   height: 100%;
   padding: 0px;
   margin: 0px;
-  font-family: clean; }
+  font-family: clean;
+  overflow: hidden; }
 
 .nav-bar {
   height: 60px;
@@ -90,7 +91,7 @@ html, body {
         .page-container .post-controls .post-control-button-container .button-list .post-control-button {
           margin: 10px;
           width: 140px;
-          height: 40px;
+          height: 50px;
           float: left;
           background-color: #009ADF;
           border-radius: 2px;
@@ -104,13 +105,28 @@ html, body {
     width: 500px;
     top: 200px;
     left: 0px;
-    position: absolute;
     height: calc(100% - 200px);
-    background-color: #ecf0f1; }
+    background-color: #ecf0f1;
+    overflow: hidden;
+    position: absolute; }
+    .page-container .post-preview-container .post-preview-inside {
+      width: 103%;
+      height: 100%;
+      overflow: auto;
+      position: absolute;
+      padding-right: -15px; }
+      .page-container .post-preview-container .post-preview-inside .post-preview {
+        height: 100px;
+        width: 100%;
+        position: relative;
+        background-color: white;
+        border-bottom: 1px solid black;
+        padding: 10px 0px 0px 10px; }
+        .page-container .post-preview-container .post-preview-inside .post-preview .post-preview-title {
+          font-size: 26px; }
   .page-container .post-viewer {
     position: absolute;
     width: calc(100% - 500px);
-    border-bottom: 1px solid black;
     color: black;
     top: 200px;
     left: 500px;
@@ -122,13 +138,67 @@ html, body {
   width: 90%;
   position: absolute;
   background-color: #bdc3c7;
-  border: 2px solid black;
   left: 5%;
   top: 5%;
   z-index: 500000000;
-  border-radius: 10px; }
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); }
   .new-post-interface .closeInterface {
+    position: absolute;
     font-size: 32px;
-    margin: 15px 20px 0px 20px; }
+    margin: 15px 20px 0px 20px;
+    z-index: 99999999; }
     .new-post-interface .closeInterface:hover {
       cursor: pointer; }
+  .new-post-interface .new-post-interface-title {
+    font-size: 32px;
+    color: white;
+    margin: 20px 100px 0px 100px;
+    position: absolute; }
+  .new-post-interface .new-post-form {
+    position: absolute;
+    width: 50%;
+    padding-left: 90px;
+    height: auto;
+    left: 0px;
+    top: 100px; }
+    .new-post-interface .new-post-form .sudo-input, .new-post-interface .new-post-form .new-post-title, .new-post-interface .new-post-form .new-post-main-text {
+      background-color: #FFFFFF;
+      position: relative;
+      min-width: 100px;
+      min-height: 20px;
+      margin: 10px;
+      border-radius: 5px;
+      padding: 10px; }
+      .new-post-interface .new-post-form .sudo-input:focus, .new-post-interface .new-post-form .new-post-title:focus, .new-post-interface .new-post-form .new-post-main-text:focus {
+        border: 0px;
+        outline: 0px; }
+    .new-post-interface .new-post-form .new-post-title {
+      font-size: 24px; }
+    .new-post-interface .new-post-form .new-post-main-text {
+      font-size: 20px;
+      height: 400px; }
+  .new-post-interface .new-post-controls {
+    position: relative;
+    margin: 0 auto;
+    height: auto;
+    width: 325px;
+    z-index: 500000000;
+    top: 80%; }
+    .new-post-interface .new-post-controls .new-post-button {
+      margin: 10px;
+      width: 140px;
+      height: 50px;
+      float: left;
+      background-color: #009ADF;
+      border-radius: 2px;
+      padding-top: 10px;
+      text-align: center;
+      font-size: 20px;
+      color: white; }
+      .new-post-interface .new-post-controls .new-post-button:hover {
+        cursor: pointer; }
+      .new-post-interface .new-post-controls .new-post-button:active {
+        background-color: #0077ac; }

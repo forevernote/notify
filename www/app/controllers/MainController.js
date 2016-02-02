@@ -1,8 +1,8 @@
 angular.module('MainController', [])
 
 .controller('HomeController', function($scope) {
-    console.log('home page');
-  })
+  console.log('home page');
+})
   .controller('RegisterController', function($scope, Auth, $window, $location) {
 
     $scope.register = {
@@ -37,34 +37,83 @@ angular.module('MainController', [])
       });
     }
   })
-  .controller('AccountController', function($scope, Post) {
+  .controller('AccountController', function($scope, Post, $rootScope) {
 
-    $scope.allPosts = {};
-    $scope.newPost = {};
+    $scope.allPosts = [];
+
     $scope.updatePost = {};
 
+    // For reseting the Post interface
+    $scope.newPostTemplate =
 
     $scope.interfaceIsOpen = false;
 
     $scope.newPostControls = {
       interfaceIsOpen: false,
+      newPost: {},
       togglePostInterface: function() {
         this.interfaceIsOpen = !this.interfaceIsOpen;
+      },
+      sendPost: function() {
+        Post.createPost(this.newPost).then((data) => {
+            // Clear Form
+            this.clearPost();
+            // Broadcast POST UPDATED
+            $rootScope.$broadcast('POSTUPDATED');
+            this.togglePostInterface();
+            console.log(data);
+        }, function(err) {
+          console.log('Error');
+          console.log(err);
+        })
+      },
+      clearPost: function() {
+        this.newPost = {};
       }
     };
 
-    $scope.sendPost = function() {
-      Post.createPost($scope.newPost).then(function(data) {
-        console.log(data);
-      });
-    };
 
     $scope.editPost = function() {
       Post.updatePost($scope.updatePost).then(function(data) {
         console.log(data);
       });
     };
-    Post.getPost().then(function(res) {
-      $scope.allPosts = res.data.posts;
-    });
-  });
+
+    $scope.getAllPosts = function() {
+      Post.getPost().then(function(res) {
+        $scope.allPosts = res.data.posts;
+        console.log('POSTS UPDATED');
+      });
+    }
+
+    // Get all Posts when page first loads
+    $scope.getAllPosts();
+
+    $scope.$on('POSTUPDATED', function(){
+      $scope.getAllPosts();
+    })
+
+  })
+
+
+// DIRECTIVES
+.directive("contenteditable", function() {
+  return {
+    restrict: "A",
+    require: "ngModel",
+    link: function(scope, element, attrs, ngModel) {
+
+      function read() {
+        ngModel.$setViewValue(element.html());
+      }
+
+      ngModel.$render = function() {
+        element.html(ngModel.$viewValue || "");
+      };
+
+      element.bind("blur keyup change", function() {
+        scope.$apply(read);
+      });
+    }
+  };
+})
