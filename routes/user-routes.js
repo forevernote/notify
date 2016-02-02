@@ -16,7 +16,7 @@ userRouter.get('/posts', authCheck, (req, res) => {
 			return res.status(500).json({
 				msg: 'Error finding posts'
 			})
-		} 
+		}
 
 		res.status(200).json({
 			msg: 'All post retrieved',
@@ -26,5 +26,18 @@ userRouter.get('/posts', authCheck, (req, res) => {
 });
 
 userRouter.post('/new', authCheck, jsonParser, (req, res) => {
-	
-})
+	var newPost = new Post(req.body);
+	newPost.author_id = req.user._id;
+	newPost.save((err, data) => {
+		if(err) {
+			return res.status(500).json({
+				msg: 'Error creating post'
+			})
+		}
+
+		res.status(200).json({
+			msg: 'Post created',
+			createdPost: data
+		});
+	});
+});
