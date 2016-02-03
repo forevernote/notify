@@ -43,5 +43,3 @@ describe('the authorization route', () => {
       });
   });
 });
-
-
