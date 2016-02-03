@@ -47,7 +47,7 @@ angular.module('MainController', [])
     $scope.showPost = function(index){
       $scope.post = $scope.allPosts[index];
       $scope.selectedIndex = index;
-    };  
+    };
 
     $scope.selectedIndex = null;
 
@@ -76,11 +76,49 @@ angular.module('MainController', [])
       }
     };
 
+    $scope.updatePostControls = {
+      updateIsOpen: false,
+      updateNewPost: {},
+      togglePostInterface: function() {
+        this.updateIsOpen = !this.updateIsOpen;
+      },
+      getOnePost: function(index) {
+        this.updateIsOpen = true;
+        $scope.post = $scope.allPosts[index];
+        updateNewPost = $scope.post;
+        var title = $scope.post.title;
+        var desc = $scope.post.content.text;
+        $scope.updatePostControls.title = title;
+        $scope.updatePostControls.content = desc;
+        console.log(title + '  ' + desc);
+      },
+      updateThePost: function(){
+        $scope.post.title = $scope.updatePostControls.title;
+        $scope.post.content.text = $scope.updatePostControls.content;
+        Post.updatePost($scope.post).then((data) => {
+            // Clear Form
+            this.clearPost();
+            // Broadcast POST UPDATED
+            $rootScope.$broadcast('POSTUPDATED');
+            this.togglePostInterface();
+            console.log(data);
+        }, function(err) {
+          console.log('Error');
+          console.log(err);
+        })
+      },
+      clearPost: function() {
+        this.updateNewPost = {};
+      }
+    }
 
     $scope.editPost = function() {
+      //console.log('clicked');
+
       Post.updatePost($scope.updatePost).then(function(data) {
         console.log(data);
       });
+
     };
 
     $scope.getAllPosts = function() {

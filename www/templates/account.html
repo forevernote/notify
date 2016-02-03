@@ -1,7 +1,7 @@
 <div class="page-container">
 	<!-- User info -->
 	<div class="user-info">
-		
+
 		<div class="user-image"></div>
 		<ul class="user-controls">
 			<li class="user-control-button">Account Settings</li>
@@ -27,7 +27,7 @@
 		<div class="post-preview-inside">
 			<div class="post-preview" ng-class="{selected: $index==selectedIndex}" ng-click="showPost($index)" ng-repeat="post in allPosts | filter:{ createdOn:  createdOn}">
 				<div class="post-preview-title">
-					{{post.title}}
+					{{post.title}} <a ng-click="updatePostControls.getOnePost($index)">Edit</a> <a>Delete</a>
 				</div>
 				<div class="post-preview-date">
 					{{post.createdOn}}
@@ -48,10 +48,10 @@
 <div ng-show="newPostControls.interfaceIsOpen" class="new-post-interface">
 	<div class="new-post-interface-title">Create A New Post</div>
 	<div class="new-post-form">
-		<div class="new-post-title" ng-model="newPostControls.newPost.title" placeholder="Title"contenteditable>
-			
+		<div class="new-post-title" ng-model="newPostControls.newPost.title" placeholder="Title" contenteditable>
+
 		</div>
-		<div class="new-post-main-text" ng-model="newPostControls.newPost.content.text" contenteditable > </div>
+		<div class="new-post-main-text" ng-model="newPostControls.newPost.content.text" contenteditable> </div>
 	</div>
 	<div class="closeInterface" ng-click="newPostControls.togglePostInterface()">&times;</div>
 	<div class="new-post-controls">
@@ -61,7 +61,28 @@
 		<div class="new-post-button" ng-click="newPostControls.sendPost()">
 			ENTER
 		</div>
-		
-		
+
+
+	</div>
+</div>
+
+<div ng-show="updatePostControls.updateIsOpen" class="new-post-interface">
+	<div class="new-post-interface-title">Create A New Post</div>
+	<div class="new-post-form">
+		<div class="new-post-title" ng-model="updatePostControls.title" placeholder="Title" contenteditable>
+
+		</div>
+		<div class="new-post-main-text" ng-model="updatePostControls.content" contenteditable> </div>
+	</div>
+	<div class="closeInterface" ng-click="updatePostControls.togglePostInterface()">&times;</div>
+	<div class="new-post-controls">
+		<div class="new-post-button" ng-click="updatePostControls.clearPost()">
+			CLEAR
+		</div>
+		<div class="new-post-button" ng-click="updatePostControls.updateThePost()">
+			ENTER
+		</div>
+
+
 	</div>
 </div>
