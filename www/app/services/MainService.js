@@ -51,4 +51,12 @@ angular.module('MainService', [])
       var uri = baseUri + '/post/' + deletePost._id;
       return $http.delete(uri);
     };
-  }]);
+  }])
+
+.factory('Broadcast', function($rootScope) {
+  return {
+    emit: function(event, data) {
+      $rootScope.$broadcast(event, data);
+    }
+  }
+});
