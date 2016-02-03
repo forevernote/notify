@@ -27,7 +27,7 @@
 		<div class="post-preview-inside">
 			<div class="post-preview" ng-class="{selected: $index==selectedIndex}" ng-click="showPost($index)" ng-repeat="post in allPosts | filter:{ createdOn:  createdOn}">
 				<div class="post-preview-title">
-					{{post.title}} <a ng-click="updatePostControls.getOnePost($index)">Edit</a> <a>Delete</a>
+					{{post.title}}<a ng-click="updatePostControls.getOnePost($index)">Edit</a><a>Delete</a>
 				</div>
 				<div class="post-preview-date">
 					{{post.createdOn}}
@@ -67,7 +67,7 @@
 </div>
 
 <div ng-show="updatePostControls.updateIsOpen" class="new-post-interface">
-	<div class="new-post-interface-title">Create A New Post</div>
+	<div class="new-post-interface-title">Update post</div>
 	<div class="new-post-form">
 		<div class="new-post-title" ng-model="updatePostControls.title" placeholder="Title" contenteditable>
 
