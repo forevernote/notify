@@ -10,14 +10,41 @@ const server = require(__dirname + '/../server.js');
 const User = require(__dirname + '/../models/user.js');
 const Post = require(__dirname + '/../models/post.js');
 var baseUri = 'localhost:3000';
+var userToken;
 
 describe('user routes', () => {
-  after((done) => {
-    Post.remove({}, function(err) {
+  before((done) => {
+    var newUser = new User();
+    newUser.authentication.email = 'notify@codefellows.com';
+    newUser.hashPassword('password');
+    newUser.save( (err, data) => {
+      userToken = data.generateToken();
       done();
     });
   });
-
+  after((done) => {
+    User.remove({}, function(err) {
+      Post.remove({}, function(err) {
+        done();
+      })
+    });
+  });
+  it('should be able to create a new post', (done) => {
+    chai.request(baseUri)
+      .post('/user/new')
+      .set('token', userToken)
+      .send({"title":"test post", "content.text":"test content"})
+      .end((err, res) => {
+        expect(err).to.eql(null);
+        expect(res).to.have.status(200);
+        expect(res.body.msg).to.eql('Post created');
+        expect(res.body).to.have.property('createdPost');
+        expect(res.body.createdPost.title).to.eql('test post');
+        expect(res.body.createdPost.content.text).to.eql('test content');
+        done();
+      })
+  });
+});
 
 
 // beforeEach((done) => {
