@@ -29,6 +29,19 @@ describe('user routes', () => {
       })
     });
   });
+  it('should be able to get all of a user\'s posts', (done) => {
+    chai.request(baseUri)
+      .get('/user/posts')
+      .set('token', userToken)
+      .end((err,res) => {
+        expect(err).to.eql(null);
+        expect(res.body.msg).to.eql('All posts retrieved');
+        expect(Array.isArray(res.body.posts).to.eql(true));
+        expect(res).to.have.status(200);
+        done();
+      });
+  });
+
   it('should be able to create a new post', (done) => {
     chai.request(baseUri)
       .post('/user/new')

@@ -21,7 +21,7 @@ userRouter.get('/posts', authCheck, (req, res) => {
 		}
 
 		res.status(200).json({
-			msg: 'All post retrieved',
+			msg: 'All posts retrieved',
 			posts: data
 		});
 	});
