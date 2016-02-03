@@ -16,13 +16,6 @@ describe('the authorization route', () => {
       done();
     });
   });
-  // beforeEach((done) => {
-  //   User.create({authentication: { email: "notify@fellows.com", password: 'password'}}, (err, data) => {
-  //     console.log(data);
-  //     this.testUser = data;
-  //     done();
-  //   });
-  // })
 
   it('should create a new user with a POST requests', (done) => {
     chai.request(baseUri)
@@ -36,4 +29,19 @@ describe('the authorization route', () => {
         done();
       });
   });
+
+  it('should check if the user has valid credentials', (done) => {
+    chai.request(baseUri)
+      .get('/auth/login')
+      .auth("notifyv11@fellows.com", "password2")
+      .end((err, res) => {
+        expect(err).to.eql(null);
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('token');
+        expect(res.body).to.have.property('user');
+        done();
+      });
+  });
 });
+
+
