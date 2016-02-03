@@ -37,52 +37,47 @@ angular.module('MainController', [])
       });
     }
   })
-  .controller('AccountController', function($scope, Post) {
-
-    $scope.allPosts = {};
-    $scope.newPost = {};
+  .controller('AccountController', function($scope, Post, $rootScope, Broadcast) {
+    // List of all posts
+    $scope.allPosts = [];
+    // Empty object for updating post
     $scope.updatePost = {};
-
+    //
     $scope.selectedIndex = null;
 
+    // For selecting map/images/other
+    $scope.include = {
+      url: 'templates/map.html'
+    };
 
-<<<<<<< HEAD
-    $scope.interfaceIsOpen = false;
-=======
+    $scope.mediaInclude = {
+      url: '',
+      showMediaInclude: function(templateUrl) {
+        this.url = templateUrl;
+      }
+    }
+
+    // Show post when clicked in Preview
     $scope.showPost = function(index) {
       $scope.post = $scope.allPosts[index];
       $scope.selectedIndex = index;
+
+      Broadcast.emit('NEWEVENTLOADED', $scope.post);
     };
 
-    $scope.$on('POSTUPDATED', function(index) {
-      $scope.showPost(index - 1);
+    // Listen for Map Click Event to Add to NEW POST
+    $scope.$on('LocationAdded', function(event, latlng) {
+      $scope.newPostControls.newPost.location.coords = latlng;
     });
->>>>>>> 38cf8380bf196e159c49584618c615dacc3980e6
 
+    // Controls for creating a new post
     $scope.newPostControls = {
       interfaceIsOpen: false,
+      newPost: {
+        location: {}
+      },
       togglePostInterface: function() {
         this.interfaceIsOpen = !this.interfaceIsOpen;
-<<<<<<< HEAD
-      }
-    };
-
-    $scope.sendPost = function() {
-      Post.createPost($scope.newPost).then(function(data) {
-        console.log(data);
-      });
-    };
-
-    $scope.editPost = function() {
-      Post.updatePost($scope.updatePost).then(function(data) {
-        console.log(data);
-      });
-    };
-    Post.getPost().then(function(res) {
-      $scope.allPosts = res.data.posts;
-    });
-  });
-=======
       },
       sendPost: function() {
         Post.createPost(this.newPost).then((data) => {
@@ -159,8 +154,10 @@ angular.module('MainController', [])
     // Get all Posts when page first loads
     $scope.getAllPosts();
 
-    $scope.$on('POSTUPDATED', function() {
+    $scope.$on('POSTUPDATED', function(index) {
+      $scope.showPost(index + 1);
       $scope.getAllPosts();
+
     })
 
   })
@@ -187,4 +184,3 @@ angular.module('MainController', [])
     }
   };
 })
->>>>>>> 38cf8380bf196e159c49584618c615dacc3980e6
