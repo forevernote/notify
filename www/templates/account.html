@@ -22,10 +22,10 @@
 			</ul>
 		</div>
 	</div>
-	<!-- Post Preview View -->
+	<!-- Post Previews -->
 	<div class="post-preview-container">
 		<div class="post-preview-inside">
-			<div class="post-preview"  ng-repeat="post in allPosts | filter:{ createdOn:  createdOn}">
+			<div class="post-preview" ng-class="{selected: $index==selectedIndex}" ng-click="showPost($index)" ng-repeat="post in allPosts | filter:{ createdOn:  createdOn}">
 				<div class="post-preview-title">
 					{{post.title}}
 				</div>
@@ -37,7 +37,12 @@
 	</div>
 	<!-- Post Viewer -->
 	<div class="post-viewer">
-		post view
+		<div class="post-viewer-title">
+			{{post.title}}
+		</div>
+		<div class="post-viewer-text">
+		{{post.content.text}}
+		</div>
 	</div>
 </div>
 <div ng-show="newPostControls.interfaceIsOpen" class="new-post-interface">

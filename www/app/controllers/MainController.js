@@ -43,10 +43,14 @@ angular.module('MainController', [])
 
     $scope.updatePost = {};
 
-    // For reseting the Post interface
-    $scope.newPostTemplate =
 
-    $scope.interfaceIsOpen = false;
+    $scope.showPost = function(index){
+      $scope.post = $scope.allPosts[index];
+      $scope.selectedIndex = index;
+    };  
+
+    $scope.selectedIndex = null;
+
 
     $scope.newPostControls = {
       interfaceIsOpen: false,
