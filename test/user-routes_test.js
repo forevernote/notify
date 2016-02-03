@@ -47,13 +47,11 @@ describe('user routes', () => {
   describe('rest requests that require a post already in db', () => {
     beforeEach((done) => {
       Post.create({ title: "test post", content: {text:"test content"}}, (err, data) => {
-        console.log(data);
         this.testPost = data;
         done();
       });
     });
     it('should be able to update a post', (done) => {
-      console.log(this.testPost._id);
       chai.request(baseUri)
       .put('/user/post/' + this.testPost._id)
       .set('token', userToken)
@@ -62,6 +60,17 @@ describe('user routes', () => {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
         expect(res.body.msg).to.eql('Post updated');
+        done();
+      });
+    });
+    it('should be able to delete a post', (done) => {
+      chai.request(baseUri)
+      .delete('/user/post/' + this.testPost._id)
+      .set('token', userToken)
+      .end((err, res) => {
+        expect(err).to.eql(null);
+        expect(res).to.have.status(200);
+        expect(res.body.msg).to.eql('Post deleted');
         done();
       });
     });
