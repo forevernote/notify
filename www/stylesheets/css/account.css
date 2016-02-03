@@ -73,7 +73,7 @@ html, body {
     position: absolute;
     float: left;
     width: calc(100% - 500px);
-    background-color: #ecf0f1;
+    background-color: white;
     height: 200px;
     top: 0px;
     left: 500px; }
@@ -121,16 +121,24 @@ html, body {
         position: relative;
         background-color: white;
         border-bottom: 1px solid black;
-        padding: 10px 0px 0px 10px; }
+        padding: 10px 0px 0px 10px;
+        transition: background-color 0.3s; }
+        .page-container .post-preview-container .post-preview-inside .post-preview:hover {
+          cursor: pointer;
+          background-color: #ecf0f1; }
+        .page-container .post-preview-container .post-preview-inside .post-preview:active {
+          background-color: #cfd9db; }
         .page-container .post-preview-container .post-preview-inside .post-preview .post-preview-title {
           font-size: 26px; }
+      .page-container .post-preview-container .post-preview-inside .post-preview.selected {
+        background-color: #ecf0f1; }
   .page-container .post-viewer {
     position: absolute;
     width: calc(100% - 500px);
     color: black;
     top: 200px;
     left: 500px;
-    background-color: #FFFFFFF;
+    background-color: #ecf0f1;
     height: calc(100% - 200px); }
 
 .new-post-interface {
