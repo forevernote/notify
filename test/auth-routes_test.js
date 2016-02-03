@@ -20,7 +20,7 @@ describe('the authorization route', () => {
   it('should create a new user with a POST requests', (done) => {
     chai.request(baseUri)
       .post('/auth/register')
-      .send({"email":"notifyv11@fellows.com", "password":"password2"})
+      .send({"email":"notify@codefellows.com", "password":"password"})
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
@@ -33,7 +33,7 @@ describe('the authorization route', () => {
   it('should check if the user has valid credentials', (done) => {
     chai.request(baseUri)
       .get('/auth/login')
-      .auth("notifyv11@fellows.com", "password2")
+      .auth("notify@codefellows.com", "password")
       .end((err, res) => {
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
