@@ -1,8 +1,8 @@
 angular.module('MainController', [])
 
 .controller('HomeController', function($scope) {
-  console.log('home page');
-})
+    console.log('home page');
+  })
   .controller('RegisterController', function($scope, Auth, $window, $location) {
 
     $scope.register = {
@@ -37,125 +37,34 @@ angular.module('MainController', [])
       });
     }
   })
-  .controller('AccountController', function($scope, Post, $rootScope) {
+  .controller('AccountController', function($scope, Post) {
 
-    $scope.allPosts = [];
-
+    $scope.allPosts = {};
+    $scope.newPost = {};
     $scope.updatePost = {};
 
 
-    $scope.showPost = function(index){
-      $scope.post = $scope.allPosts[index];
-      $scope.selectedIndex = index;
-    };
-
-    $scope.selectedIndex = null;
-
+    $scope.interfaceIsOpen = false;
 
     $scope.newPostControls = {
       interfaceIsOpen: false,
-      newPost: {},
       togglePostInterface: function() {
         this.interfaceIsOpen = !this.interfaceIsOpen;
-      },
-      sendPost: function() {
-        Post.createPost(this.newPost).then((data) => {
-            // Clear Form
-            this.clearPost();
-            // Broadcast POST UPDATED
-            $rootScope.$broadcast('POSTUPDATED');
-            this.togglePostInterface();
-            console.log(data);
-        }, function(err) {
-          console.log('Error');
-          console.log(err);
-        })
-      },
-      clearPost: function() {
-        this.newPost = {};
       }
     };
 
-    $scope.updatePostControls = {
-      updateIsOpen: false,
-      updateNewPost: {},
-      togglePostInterface: function() {
-        this.updateIsOpen = !this.updateIsOpen;
-      },
-      getOnePost: function(index) {
-        this.updateIsOpen = true;
-        $scope.post = $scope.allPosts[index];
-        updateNewPost = $scope.post;
-        var title = $scope.post.title;
-        var desc = $scope.post.content.text;
-        $scope.updatePostControls.title = title;
-        $scope.updatePostControls.content = desc;
-        console.log(title + '  ' + desc);
-      },
-      updateThePost: function(){
-        $scope.post.title = $scope.updatePostControls.title;
-        $scope.post.content.text = $scope.updatePostControls.content;
-        Post.updatePost($scope.post).then((data) => {
-            // Clear Form
-            this.clearPost();
-            // Broadcast POST UPDATED
-            $rootScope.$broadcast('POSTUPDATED');
-            this.togglePostInterface();
-            console.log(data);
-        }, function(err) {
-          console.log('Error');
-          console.log(err);
-        })
-      },
-      clearPost: function() {
-        this.updateNewPost = {};
-      }
-    }
+    $scope.sendPost = function() {
+      Post.createPost($scope.newPost).then(function(data) {
+        console.log(data);
+      });
+    };
 
     $scope.editPost = function() {
-      //console.log('clicked');
-
       Post.updatePost($scope.updatePost).then(function(data) {
         console.log(data);
       });
-
     };
-
-    $scope.getAllPosts = function() {
-      Post.getPost().then(function(res) {
-        $scope.allPosts = res.data.posts;
-        console.log('POSTS UPDATED');
-      });
-    }
-
-    // Get all Posts when page first loads
-    $scope.getAllPosts();
-
-    $scope.$on('POSTUPDATED', function(){
-      $scope.getAllPosts();
-    })
-
-  })
-
-
-// DIRECTIVES
-.directive("contenteditable", function() {
-  return {
-    restrict: "A",
-    require: "ngModel",
-    link: function(scope, element, attrs, ngModel) {
-
-      function read() {
-        ngModel.$setViewValue(element.html());
-      }
-
-      ngModel.$render = function() {
-        element.html(ngModel.$viewValue || "");
-      };
-
-      element.bind("blur keyup change", function() {
-        scope.$apply(read);
-      });
-    }
-  };
-})
+    Post.getPost().then(function(res) {
+      $scope.allPosts = res.data.posts;
+    });
+  });
