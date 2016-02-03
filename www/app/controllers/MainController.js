@@ -37,15 +37,18 @@ angular.module('MainController', [])
       });
     }
   })
-  .controller('AccountController', function($scope, Post, $rootScope) {
+  .controller('AccountController', function($scope, Post) {
 
-    $scope.allPosts = [];
-
+    $scope.allPosts = {};
+    $scope.newPost = {};
     $scope.updatePost = {};
 
     $scope.selectedIndex = null;
 
 
+<<<<<<< HEAD
+    $scope.interfaceIsOpen = false;
+=======
     $scope.showPost = function(index) {
       $scope.post = $scope.allPosts[index];
       $scope.selectedIndex = index;
@@ -54,12 +57,32 @@ angular.module('MainController', [])
     $scope.$on('POSTUPDATED', function(index) {
       $scope.showPost(index - 1);
     });
+>>>>>>> 38cf8380bf196e159c49584618c615dacc3980e6
 
     $scope.newPostControls = {
       interfaceIsOpen: false,
-      newPost: {},
       togglePostInterface: function() {
         this.interfaceIsOpen = !this.interfaceIsOpen;
+<<<<<<< HEAD
+      }
+    };
+
+    $scope.sendPost = function() {
+      Post.createPost($scope.newPost).then(function(data) {
+        console.log(data);
+      });
+    };
+
+    $scope.editPost = function() {
+      Post.updatePost($scope.updatePost).then(function(data) {
+        console.log(data);
+      });
+    };
+    Post.getPost().then(function(res) {
+      $scope.allPosts = res.data.posts;
+    });
+  });
+=======
       },
       sendPost: function() {
         Post.createPost(this.newPost).then((data) => {
@@ -164,3 +187,4 @@ angular.module('MainController', [])
     }
   };
 })
+>>>>>>> 38cf8380bf196e159c49584618c615dacc3980e6

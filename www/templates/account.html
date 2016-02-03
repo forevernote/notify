@@ -27,7 +27,8 @@
 		<div class="post-preview-inside">
 			<div class="post-preview" ng-class="{selected: $index==selectedIndex}" ng-click="showPost($index)" ng-repeat="post in allPosts | filter:{ createdOn:  createdOn}">
 				<div class="post-preview-title">
-					{{post.title}}<a ng-click="updatePostControls.getOnePost($index)">Edit</a>
+					{{post.title}}
+					<a ng-click="updatePostControls.getOnePost($index)">Edit</a>
 					<a ng-click="deletePostControls.delete($index)">Delete</a>
 				</div>
 				<div class="post-preview-date">
