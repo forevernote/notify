@@ -44,7 +44,7 @@ angular.module('MainService', [])
     return $http.post(uri, newPost);
   };
   this.updatePost = function(updatePost) {
-    var uri = baseUri + '/' + updatePost._id;
+    var uri = baseUri + '/post/' + updatePost._id;
     return $http.put(uri, updatePost);
   };
   this.deletePost = function(deletePost) {
