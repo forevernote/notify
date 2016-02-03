@@ -1,8 +1,8 @@
 angular.module('MainController', [])
 
 .controller('HomeController', function($scope) {
-  console.log('home page');
-})
+    console.log('home page');
+  })
   .controller('RegisterController', function($scope, Auth, $window, $location) {
 
     $scope.register = {
@@ -43,14 +43,17 @@ angular.module('MainController', [])
 
     $scope.updatePost = {};
 
+    $scope.selectedIndex = null;
 
-    $scope.showPost = function(index){
+
+    $scope.showPost = function(index) {
       $scope.post = $scope.allPosts[index];
       $scope.selectedIndex = index;
     };
 
-    $scope.selectedIndex = null;
-
+    $scope.$on('POSTUPDATED', function(index) {
+      $scope.showPost(index - 1);
+    });
 
     $scope.newPostControls = {
       interfaceIsOpen: false,
@@ -60,12 +63,12 @@ angular.module('MainController', [])
       },
       sendPost: function() {
         Post.createPost(this.newPost).then((data) => {
-            // Clear Form
-            this.clearPost();
-            // Broadcast POST UPDATED
-            $rootScope.$broadcast('POSTUPDATED');
-            this.togglePostInterface();
-            console.log(data);
+          // Clear Form
+          this.clearPost();
+          // Broadcast POST UPDATED
+          $rootScope.$broadcast('POSTUPDATED');
+          this.togglePostInterface();
+          console.log(data);
         }, function(err) {
           console.log('Error');
           console.log(err);
@@ -73,6 +76,17 @@ angular.module('MainController', [])
       },
       clearPost: function() {
         this.newPost = {};
+      }
+    };
+
+    $scope.deletePostControls = {
+      delete: function(index) {
+        Post.deletePost($scope.allPosts[index]).then(function(data) {
+          console.log('Delete Successful');
+          $rootScope.$broadcast('POSTUPDATED', index);
+        }, function(err) {
+          console.log('Failed to delete');
+        })
       }
     };
 
@@ -92,16 +106,16 @@ angular.module('MainController', [])
         $scope.updatePostControls.content = desc;
         console.log(title + '  ' + desc);
       },
-      updateThePost: function(){
+      updateThePost: function() {
         $scope.post.title = $scope.updatePostControls.title;
         $scope.post.content.text = $scope.updatePostControls.content;
         Post.updatePost($scope.post).then((data) => {
-            // Clear Form
-            this.clearPost();
-            // Broadcast POST UPDATED
-            $rootScope.$broadcast('POSTUPDATED');
-            this.togglePostInterface();
-            console.log(data);
+          // Clear Form
+          this.clearPost();
+          // Broadcast POST UPDATED
+          $rootScope.$broadcast('POSTUPDATED');
+          this.togglePostInterface();
+          console.log(data);
         }, function(err) {
           console.log('Error');
           console.log(err);
@@ -111,15 +125,6 @@ angular.module('MainController', [])
         this.updateNewPost = {};
       }
     }
-
-    $scope.editPost = function() {
-      //console.log('clicked');
-
-      Post.updatePost($scope.updatePost).then(function(data) {
-        console.log(data);
-      });
-
-    };
 
     $scope.getAllPosts = function() {
       Post.getPost().then(function(res) {
@@ -131,7 +136,7 @@ angular.module('MainController', [])
     // Get all Posts when page first loads
     $scope.getAllPosts();
 
-    $scope.$on('POSTUPDATED', function(){
+    $scope.$on('POSTUPDATED', function() {
       $scope.getAllPosts();
     })
 
