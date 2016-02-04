@@ -2,7 +2,7 @@
   font-family: "clean";
   src: url(../fonts/clean.woff);
 }
-$nav-bar-height: 60px;
+$nav-bar-height: 50px;
 html,
 body {
   height: 100%;
@@ -41,23 +41,25 @@ body {
   position: absolute;
   height: calc(100% - #{$nav-bar-height});
   width: 100%;
-  background-color: lightgrey;
   float: left;
   .user-info {
     width: 500px;
     height: 200px;
     position: absolute;
-    background-color: #FFFFFFF;
+    background-color: #9b59b6;
     padding: 0;
     margin: 0;
     top: 0;
     left: 0;
+    border-bottom: 1px inset rgba(0,0,0,0.2);
+    border-right: 1px inset rgba(0,0,0,0.2);
     .user-image {
       position: relative;
       height: 150px;
       width: 150px;
       border-radius: 50%;
-      border: 1px solid black;
+      background-color: white;
+      border: 1px inset rgba(0,0,0,0.2);
       margin: 0 auto;
       background-color: #FFFFFFF;
       top: 25px;
@@ -79,36 +81,42 @@ body {
   }
   .post-controls {
     position: absolute;
-    float: left;
     width: calc(100% - 500px);
     background-color: white;
-    height: 200px;
+    height: auto;
     top: 0;
     left: 500px;
+
     .post-control-button-container {
       position: relative;
-      width: 640px;
+      width: 100%;
       height: auto;
       margin: 0 auto;
-      top: 110px;
+
       .button-list {
+        position: relative;
         width: 100%;
         list-style: none;
         margin: 0;
         padding: 0;
+
         .post-control-button {
-          margin: 10px;
-          width: 140px;
-          height: 50px;
+          position: relative;
+          width: 25%;
+          height: 70px;
           float: left;
-          background-color: #009ADF;
-          border-radius: 2px;
-          padding-top: 10px;
+          background-color:#9b59b6;
           text-align: center;
           font-size: 20px;
           color: white;
+          padding-top: 20px;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          transition: background-color 0.3s, color 0.3s;
           &:hover {
             cursor: pointer;
+            background-color: white;
+            color: #9b59b6;
           }
         }
       }
@@ -119,9 +127,35 @@ body {
     top: 200px;
     left: 0;
     height: calc(100% - 200px);
-    background-color: #ecf0f1;
+    background-color: #FFFFFF;
     overflow: hidden;
     position: absolute;
+    border-right: 1px inset rgba(0,0,0,0.2);
+     .post-search{
+        height: 40px;
+        width: 100%;
+        background-color: #bdc3c7;
+        position: relative;
+        border-bottom: 1px inset rgba(0,0,0,0.2);
+
+        input {
+          top: 5px;
+          border: none;
+          padding: 5px;
+          box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.4);
+          border-radius: 10px;
+          height: 25px;
+          width: 250px;
+          margin: 0 auto;
+          position: absolute;
+          left: 125px;
+
+          &:focus{
+            border: none;
+            outline: none;
+          }
+        }
+      }
     .post-preview-inside {
       width: 103%;
       height: 100%;
@@ -132,23 +166,22 @@ body {
         height: 100px;
         width: 100%;
         position: relative;
-        background-color: white;
-        border-bottom: 1px solid black;
+        background-color: #ecf0f1;
+        border-bottom: 1px inset rgba(0,0,0,0.2);
         padding: 10px 0 0 10px;
-        transition: background-color 0.3s;
         &:hover {
           cursor: pointer;
-          background-color: #ecf0f1;
+          background-color: #FFFFFF;
         }
         &:active {
-          background-color: darken(#ecf0f1, 10%);
+          background-color: darken(#FFFFFF, 10%);
         }
         .post-preview-title {
           font-size: 26px;
         }
       }
       .post-preview.selected {
-        background-color: #ecf0f1;
+        background-color: #FFFFFF;
       }
     }
   }
@@ -156,10 +189,11 @@ body {
     position: absolute;
     width: calc(100% - 500px);
     color: black;
-    top: 200px;
+    top: 70px;
     left: 500px;
-    background-color: #ecf0f1;
-    height: calc(100% - 200px);
+    background-color: #FFFFFF;
+    height: calc(100% - 70px);
+    border-top: 1px inset rgba(0,0,0,0.2);
 
     .post-viewer-content{
       height: 100%;
@@ -173,7 +207,7 @@ body {
       height: 100%;
       width: 50%;
       left: 50%;
-      background-color: red;
+      background-color: white;
 
       .map-container {
         height: 100%;

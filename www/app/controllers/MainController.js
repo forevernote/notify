@@ -61,8 +61,21 @@ angular.module('MainController', [])
     $scope.selectedItemId = null;
 
     // For selecting map/images/other
-    $scope.include = {
-      url: 'templates/map.html'
+    $scope.viewerInclude = {
+      url: '',
+      changeIncludeUrl: function(templateUrl){
+        if(templateUrl == this.url) {
+          this.showInclude  = false
+          this.url = '';
+        } else {
+          if(templateUrl == 'templates/map.html') {
+            Broadcast.emit('MAPBUTTONCLICKED', $scope.post);
+          }
+          this.url = templateUrl;
+          this.showInclude = true;
+        }
+      },
+      showInclude: false
     };
 
     $scope.mediaInclude = {
