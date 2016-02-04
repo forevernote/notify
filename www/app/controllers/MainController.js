@@ -1,9 +1,23 @@
 angular.module('MainController', [])
 
-  .controller('HomeController', function($scope) {
-    console.log('home page');
-  })
+.controller('NavController', function($scope, $rootScope) {
+  $scope.auth = {
+    showAuthForm: false,
+    toggleAuthForm: function() {
+      console.log('CLicked');
+
+      this.showAuthForm = !this.showAuthForm;
+      console.log(this.showAuthForm);
+    }
+  };
+})
+
+.controller('HomeController', function($scope) {
+  console.log('HomeController');
+  // Handles showing and hiding auth form
+})
   .controller('RegisterController', function($scope, Auth, $window, $location) {
+    console.log('Register Controller');
 
     $scope.register = {
       email: '',
@@ -23,6 +37,7 @@ angular.module('MainController', [])
 
   })
   .controller('LoginController', function($scope, Auth, $window, $location) {
+    console.log('Login Controller');
 
     $scope.loginUser = function() {
 
@@ -153,32 +168,6 @@ angular.module('MainController', [])
 
     })
 
-
-/********************************** FOR UPDATING USER INFO*********************/
-
-    $scope.update = {
-      name: {
-        first: '',
-        last: ''
-      },
-      birthday: '',
-      gender: '',
-      geoTag: '',
-      social:'',
-      hint: '',
-      authentication: {
-        email: '',
-        password: ''
-      }
-    };
-
-    $scope.updateUser = function() {
-      Auth.update($scope.update).then(function(res) {
-        console.log(update);
-        }, function (err) {
-          console.log('Error');
-      });
-    };
   })
 
 
