@@ -1,8 +1,8 @@
 angular.module('MainController', [])
 
-.controller('HomeController', function($scope) {
-  console.log('home page');
-})
+  .controller('HomeController', function($scope) {
+    console.log('home page');
+  })
   .controller('RegisterController', function($scope, Auth, $window, $location) {
 
     $scope.register = {
@@ -146,13 +146,39 @@ angular.module('MainController', [])
 
     $scope.$on('POSTUPDATED', function() {
       if ($scope.allPosts.length) {
-        
+
 
       }
       $scope.getAllPosts();
 
     })
 
+
+/********************************** FOR UPDATING USER INFO*********************/
+
+    $scope.update = {
+      name: {
+        first: '',
+        last: ''
+      },
+      birthday: '',
+      gender: '',
+      geoTag: '',
+      social:'',
+      hint: '',
+      authentication: {
+        email: '',
+        password: ''
+      }
+    };
+
+    $scope.updateUser = function() {
+      Auth.update($scope.update).then(function(res) {
+        console.log(update);
+        }, function (err) {
+          console.log('Error');
+      });
+    };
   })
 
 
