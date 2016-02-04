@@ -30,7 +30,10 @@ angular.module('MainService', [])
     this.register = function(data) {
       return $http.post('/auth/register', data);
     };
-
+    this.update = function(data) {
+      var uri = '/auth/update/' + data._id;
+      return $http.put(uri, data);
+    };
 
   }])
   .service('Post', ['$http', function($http) {
@@ -60,3 +63,5 @@ angular.module('MainService', [])
     }
   }
 });
+
+

@@ -9,6 +9,8 @@ process.env.MONGO_URI = 'mongodb://notifyadmin:codefellows401@apollo.modulusmong
 const server = require(__dirname + '/../server.js');
 const User = require(__dirname + '/../models/user.js');
 var baseUri = 'localhost:3000';
+var userId;
+var userToken;
 
 describe('the authorization route', () => {
   after((done) => {
@@ -22,6 +24,8 @@ describe('the authorization route', () => {
       .post('/auth/register')
       .send({"email":"notify@codefellows.com", "password":"password"})
       .end((err, res) => {
+        userId = res.body.user._id;
+        userToken = res.body.token;
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
         expect(res.body).to.have.property('token');
@@ -39,6 +43,19 @@ describe('the authorization route', () => {
         expect(res).to.have.status(200);
         expect(res.body).to.have.property('token');
         expect(res.body).to.have.property('user');
+        done();
+      });
+  });
+
+  it('should be able to update a user', (done) => {
+    chai.request(baseUri)
+      .put('/auth/update/' + userId)
+      .set('token', userToken)
+      .send({authentication: {email: "notefellows@codefellows.com", password: "8675309"}})
+      .end((err, res) => {
+        expect(err).to.eql(null);
+        expect(res).to.have.status(200);
+        expect(res.body.msg).to.eql('User updated');
         done();
       });
   });

@@ -1,6 +1,6 @@
 angular.module('MainController', [])
 
-.controller('HomeController', function($scope) {
+  .controller('HomeController', function($scope) {
     console.log('home page');
   })
   .controller('RegisterController', function($scope, Auth, $window, $location) {
@@ -160,6 +160,32 @@ angular.module('MainController', [])
 
     })
 
+
+/********************************** FOR UPDATING USER INFO*********************/
+
+    $scope.update = {
+      name: {
+        first: '',
+        last: ''
+      },
+      birthday: '',
+      gender: '',
+      geoTag: '',
+      social:'',
+      hint: '',
+      authentication: {
+        email: '',
+        password: ''
+      }
+    };
+
+    $scope.updateUser = function() {
+      Auth.update($scope.update).then(function(res) {
+        console.log(update);
+        }, function (err) {
+          console.log('Error');
+      });
+    };
   })
 
 
@@ -184,3 +210,4 @@ angular.module('MainController', [])
     }
   };
 })
+

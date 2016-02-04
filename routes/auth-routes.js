@@ -81,3 +81,21 @@ authRouter.get('/login', basicHTTP, (req, res) => {
 
   })
 })
+
+// User update
+authRouter.put('/update/:id', authCheck, jsonParser, (req, res) => {
+  var updateUser = req.body;
+  delete updateUser._id;
+  User.update({
+    _id: req.params.id
+  }, updateUser, (err) => {
+    if (err) {
+      return res.status(500).json({
+        msg: 'Error updating user'
+      })
+    }
+    res.status(200).json({
+      msg: 'User updated',
+    });
+  });
+});
