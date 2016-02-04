@@ -1,9 +1,23 @@
 angular.module('MainController', [])
 
+.controller('NavController', function($scope, $rootScope) {
+  $scope.auth = {
+    showAuthForm: false,
+    toggleAuthForm: function() {
+      console.log('CLicked');
+
+      this.showAuthForm = !this.showAuthForm;
+      console.log(this.showAuthForm);
+    }
+  };
+})
+
 .controller('HomeController', function($scope) {
-    console.log('home page');
-  })
+  console.log('HomeController');
+  // Handles showing and hiding auth form
+})
   .controller('RegisterController', function($scope, Auth, $window, $location) {
+    console.log('Register Controller');
 
     $scope.register = {
       email: '',
@@ -23,6 +37,7 @@ angular.module('MainController', [])
 
   })
   .controller('LoginController', function($scope, Auth, $window, $location) {
+    console.log('Login Controller');
 
     $scope.loginUser = function() {
 
@@ -43,7 +58,7 @@ angular.module('MainController', [])
     // Empty object for updating post
     $scope.updatePost = {};
     //
-    $scope.selectedIndex = null;
+    $scope.selectedItemId = null;
 
     // For selecting map/images/other
     $scope.include = {
@@ -58,9 +73,14 @@ angular.module('MainController', [])
     }
 
     // Show post when clicked in Preview
-    $scope.showPost = function(index) {
-      $scope.post = $scope.allPosts[index];
-      $scope.selectedIndex = index;
+    $scope.showPost = function(id) {
+      $scope.allPosts.forEach(function(currentPost, postIndex) {
+        if (currentPost._id == id) {
+          $scope.post = currentPost
+        }
+      })
+
+      $scope.selectedItemId = id;
 
       Broadcast.emit('NEWEVENTLOADED', $scope.post);
     };
@@ -98,10 +118,11 @@ angular.module('MainController', [])
     };
 
     $scope.deletePostControls = {
-      delete: function(index) {
-        Post.deletePost($scope.allPosts[index]).then(function(data) {
+      delete: function() {
+        Post.deletePost($scope.post).then(function(data) {
           console.log('Delete Successful');
-          $rootScope.$broadcast('POSTUPDATED', index);
+          $scope.post = null;
+          $rootScope.$broadcast('POSTUPDATED');
         }, function(err) {
           console.log('Failed to delete');
         })
@@ -114,33 +135,17 @@ angular.module('MainController', [])
       togglePostInterface: function() {
         this.updateIsOpen = !this.updateIsOpen;
       },
-      getOnePost: function(index) {
-        this.updateIsOpen = true;
-        $scope.post = $scope.allPosts[index];
-        updateNewPost = $scope.post;
-        var title = $scope.post.title;
-        var desc = $scope.post.content.text;
-        $scope.updatePostControls.title = title;
-        $scope.updatePostControls.content = desc;
-        console.log(title + '  ' + desc);
-      },
       updateThePost: function() {
-        $scope.post.title = $scope.updatePostControls.title;
-        $scope.post.content.text = $scope.updatePostControls.content;
         Post.updatePost($scope.post).then((data) => {
           // Clear Form
           this.clearPost();
           // Broadcast POST UPDATED
           $rootScope.$broadcast('POSTUPDATED');
           this.togglePostInterface();
-          console.log(data);
-        }, function(err) {
-          console.log('Error');
-          console.log(err);
-        })
+        }, function(err) {})
       },
       clearPost: function() {
-        this.updateNewPost = {};
+        $scope.post = $scope.post;
       }
     }
 
@@ -154,8 +159,11 @@ angular.module('MainController', [])
     // Get all Posts when page first loads
     $scope.getAllPosts();
 
-    $scope.$on('POSTUPDATED', function(index) {
-      $scope.showPost(index + 1);
+    $scope.$on('POSTUPDATED', function() {
+      if ($scope.allPosts.length) {
+
+
+      }
       $scope.getAllPosts();
 
     })
