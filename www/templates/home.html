@@ -1,6 +1,147 @@
-<div class="page-container">
-  <div>
-    <img src="http://faculty.weber.edu/kmackay/matsumoto_journal.jpg" />
+<div ng-controller="HomeController">
 
+<!-- Header -->
+<a name="home"></a>
+<div class="intro-header">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1>Notify</h1>
+                    <h3>type out your thought</h3>
+                    <hr class="intro-divider">
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.intro-header -->
+
+<!-- Page Content -->
+
+<a  name="services"></a>
+<div class="content-section-a">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">Death to the Stock Photo:<br>Special Thanks</h2>
+                <p class="lead">A special thanks to <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>
+            </div>
+            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                <img class="img-responsive" src="stylesheets/img/woodDesk.jpeg" alt="">
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.content-section-a -->
+
+<div class="content-section-b">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                <hr class="section-heading-spacer">
+                <div class="clearfix"></div>
+                <h2 class="section-heading">3D Device Mockups<br>by PSDCovers</h2>
+                <p class="lead">Turn your 2D designs into high quality, 3D product shots in seconds using free Photoshop actions by <a target="_blank" href="http://www.psdcovers.com/">PSDCovers</a>! Visit their website to download some of their awesome, free photoshop actions!</p>
+            </div>
+            <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                <img class="img-responsive" src="stylesheets/img/macbook.jpg" alt="">
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.content-section-b -->
+<a name="aboutus"></a>
+<div class="content-section-a">
+
+    <div class="container">
+
+
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.content-section-a -->
+<a  name="contact"></a>
+  <div class="banner">
+
+      <div class="container">
+
+          <div class="row">
+              <div class="col-lg-6">
+                  <p class="copyright text-muted small" style="color: white;">Copyright &copy; Notify 2016. All Rights Reserved</p>
+              </div>
+              <div class="col-lg-6">
+              </div>
+          </div>
+
+      </div>
+      <!-- /.container -->
+
+  </div>
+  <!-- /.banner -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Sign-up</h4>
+        </div>
+        <div class="modal-body">
+
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#login-tab" aria-controls="login-tab" role="tab" data-toggle="tab">Login</a></li>
+            <li role="presentation"><a href="#signup-tab" aria-controls="signup-tab" role="tab" data-toggle="tab">Create an account</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content signup-form">
+
+            <div role="tabpanel" class="tab-pane" id="login-tab" ng-controller="LoginController">
+              <form>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <button type="button" class="btn btn-info">Login</button>
+
+                <input type="text" name="email" ng-model="login.email" placeholder="Email">
+                <input type="password" name="password" ng-model="login.password" placeholder="Password">
+                <button ng-click="loginUser()"> Login </button>
+              <form>
+            </div>
+
+            <div role="tabpanel" class="tab-pane active" id="signup-tab" ng-controller="RegisterController">
+              <form>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                <button type="button" class="btn btn-info" href="#/register">Sign-up</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
   </div>
 </div>
