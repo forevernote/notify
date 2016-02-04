@@ -3,25 +3,26 @@ angular.module('FeatureController', [])
 .controller('MapController', function($scope) {
   $scope.marker = null;
   $scope.$on('NEWEVENTLOADED', function(event, data) {
-    var mainMarker = {
+      if (data.location) {
+        var mainMarker = {
           lat: data.location.coords.lat + 0,
           lng: data.location.coords.lng + 0,
           focus: true,
           message: data.title,
           draggable: false
-      };
-    angular.extend($scope, {
-      london: {
-          lat: 51.505,
-          lng: -0.09,
-          zoom: 8
-      },
-      markers: {
-        mainMarker: angular.copy(mainMarker)
+        };
+        angular.extend($scope, {
+          london: {
+            lat: 51.505,
+            lng: -0.09,
+            zoom: 8
+          },
+          markers: {
+            mainMarker: angular.copy(mainMarker)
+          }
+        })
       }
-    })
   })
-
 })
 
 .controller('PostMapController', function($scope, Broadcast) {
