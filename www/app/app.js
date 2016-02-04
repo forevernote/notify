@@ -1,5 +1,5 @@
 angular.module('notify', ['ngRoute', 'MainController', 'FeatureController',
-		'MainService', 'leaflet-directive'
+		'MainService', 'leaflet-directive', 'ngAnimate'
 	])
 	.config(function($httpProvider) {
 		$httpProvider.interceptors.push('authInterceptor');
@@ -30,14 +30,6 @@ angular.module('notify', ['ngRoute', 'MainController', 'FeatureController',
 			.when('/', {
 				templateUrl: 'templates/home.html',
 				controller: 'HomeController'
-			})
-			.when('/login', {
-				templateUrl: 'templates/login.html',
-				controller: 'LoginController'
-			})
-			.when('/register', {
-				templateUrl: 'templates/register.html',
-				controller: 'RegisterController'
 			})
 			.when('/account', {
 				templateUrl: 'templates/account.html',
