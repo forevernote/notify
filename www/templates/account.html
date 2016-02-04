@@ -17,19 +17,18 @@
 			<ul class="button-list">
 				<li ng-click="newPostControls.togglePostInterface()" class="post-control-button">New Post</li>
 				<li ng-click="" class="post-control-button">New Post</li>
-				<li ng-click="" class="post-control-button">New Post</li>
-				<li ng-click="" class="post-control-button">New Post</li>
+				<li ng-click="updatePostControls.togglePostInterface()" class="post-control-button">Edit Post</li>
+				<li ng-click="deletePostControls.delete()" class="post-control-button">Delete</li>
 			</ul>
 		</div>
 	</div>
 	<!-- Post Previews -->
 	<div class="post-preview-container">
+		<input type="search" ng-model="search" placeholder="Search…">
 		<div class="post-preview-inside">
-			<div class="post-preview" ng-class="{selected: $index==selectedIndex}" ng-click="showPost($index)" ng-repeat="post in allPosts | filter:{ createdOn:  createdOn}">
+			<div class="post-preview" ng-class="{selected: post._id == selectedItemId}" ng-click="showPost(post._id)" ng-repeat="post in allPosts | filter:search">
 				<div class="post-preview-title">
 					{{post.title}}
-					<a ng-click="updatePostControls.getOnePost($index)">Edit</a>
-					<a ng-click="deletePostControls.delete($index)">Delete</a>
 				</div>
 				<div class="post-preview-date">
 					{{post.createdOn}}
@@ -90,10 +89,10 @@
 <div ng-show="updatePostControls.updateIsOpen" class="new-post-interface">
 	<div class="new-post-interface-title">Update post</div>
 	<div class="new-post-form">
-		<div class="new-post-title" ng-model="updatePostControls.title" placeholder="Title" contenteditable>
+		<div class="new-post-title" ng-model="post.title" placeholder="Title" contenteditable>
 
 		</div>
-		<div class="new-post-main-text" ng-model="updatePostControls.content" contenteditable> </div>
+		<div class="new-post-main-text" ng-model="post.content.text" contenteditable> </div>
 	</div>
 	<div class="closeInterface" ng-click="updatePostControls.togglePostInterface()">&times;</div>
 	<div class="new-post-controls">
