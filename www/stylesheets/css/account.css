@@ -1,7 +1,13 @@
-html, body {
+@font-face {
+  font-family: "clean";
+  src: url(../fonts/clean.woff); }
+
+html,
+body {
   height: 100%;
-  padding: 0px;
-  margin: 0px; }
+  padding: 0;
+  margin: 0;
+  font-family: clean; }
 
 .nav-bar {
   height: 60px;
@@ -24,24 +30,223 @@ html, body {
     .nav-bar ul li {
       float: left;
       position: relative;
-      margin: 0px 10px 0px 10px; }
+      margin: 0 10px; }
 
 .page-container {
   top: 60px;
   position: absolute;
   height: calc(100% - 60px);
   width: 100%;
-  background-color: lightgrey; }
-  .page-container .post-container {
+  background-color: lightgrey;
+  float: left; }
+  .page-container .user-info {
     width: 500px;
-    position: relative;
-    height: calc(100% - 200px);
-    top: 200px;
-    background-color: #FFFFFF; }
-    .page-container .post-container .post-preview {
+    height: 200px;
+    position: absolute;
+    background-color: #FFFFFFF;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0; }
+    .page-container .user-info .user-image {
       position: relative;
-      width: 100%;
-      background-color: lightgrey;
-      border-bottom: 1px solid black;
-      color: black;
-      height: 100px; }
+      height: 150px;
+      width: 150px;
+      border-radius: 50%;
+      border: 1px solid black;
+      margin: 0 auto;
+      background-color: #FFFFFFF;
+      top: 25px; }
+    .page-container .user-info .user-controls {
+      height: 150px;
+      width: auto;
+      position: absolute;
+      right: 10px;
+      list-style: none;
+      top: 0;
+      top: 10px; }
+      .page-container .user-info .user-controls .user-control-button {
+        font-size: 18px;
+        margin: 10px;
+        color: black; }
+  .page-container .post-controls {
+    position: absolute;
+    float: left;
+    width: calc(100% - 500px);
+    background-color: white;
+    height: 200px;
+    top: 0;
+    left: 500px; }
+    .page-container .post-controls .post-control-button-container {
+      position: relative;
+      width: 640px;
+      height: auto;
+      margin: 0 auto;
+      top: 110px; }
+      .page-container .post-controls .post-control-button-container .button-list {
+        width: 100%;
+        list-style: none;
+        margin: 0;
+        padding: 0; }
+        .page-container .post-controls .post-control-button-container .button-list .post-control-button {
+          margin: 10px;
+          width: 140px;
+          height: 50px;
+          float: left;
+          background-color: #009ADF;
+          border-radius: 2px;
+          padding-top: 10px;
+          text-align: center;
+          font-size: 20px;
+          color: white; }
+          .page-container .post-controls .post-control-button-container .button-list .post-control-button:hover {
+            cursor: pointer; }
+  .page-container .post-preview-container {
+    width: 500px;
+    top: 200px;
+    left: 0;
+    height: calc(100% - 200px);
+    background-color: #ecf0f1;
+    overflow: hidden;
+    position: absolute; }
+    .page-container .post-preview-container .post-preview-inside {
+      width: 103%;
+      height: 100%;
+      overflow: auto;
+      position: absolute;
+      padding-right: -15px; }
+      .page-container .post-preview-container .post-preview-inside .post-preview {
+        height: 100px;
+        width: 100%;
+        position: relative;
+        background-color: white;
+        border-bottom: 1px solid black;
+        padding: 10px 0 0 10px;
+        transition: background-color 0.3s; }
+        .page-container .post-preview-container .post-preview-inside .post-preview:hover {
+          cursor: pointer;
+          background-color: #ecf0f1; }
+        .page-container .post-preview-container .post-preview-inside .post-preview:active {
+          background-color: #cfd9db; }
+        .page-container .post-preview-container .post-preview-inside .post-preview .post-preview-title {
+          font-size: 26px; }
+      .page-container .post-preview-container .post-preview-inside .post-preview.selected {
+        background-color: #ecf0f1; }
+  .page-container .post-viewer {
+    position: absolute;
+    width: calc(100% - 500px);
+    color: black;
+    top: 200px;
+    left: 500px;
+    background-color: #ecf0f1;
+    height: calc(100% - 200px); }
+    .page-container .post-viewer .post-viewer-content {
+      height: 100%;
+      position: absolute;
+      width: 50%; }
+    .page-container .post-viewer .post-viewer-media {
+      position: absolute;
+      height: 100%;
+      width: 50%;
+      left: 50%;
+      background-color: red; }
+      .page-container .post-viewer .post-viewer-media .map-container {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        display: block; }
+        .page-container .post-viewer .post-viewer-media .map-container #viewer-map {
+          height: 100%;
+          width: 100%;
+          position: absolute; }
+
+.new-post-interface {
+  height: 90%;
+  width: 90%;
+  position: absolute;
+  background-color: #bdc3c7;
+  left: 5%;
+  top: 5%;
+  z-index: 500000000;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.75); }
+  .new-post-interface .closeInterface {
+    position: absolute;
+    font-size: 32px;
+    margin: 15px 20px 0;
+    z-index: 99999999; }
+    .new-post-interface .closeInterface:hover {
+      cursor: pointer; }
+  .new-post-interface .new-post-interface-title {
+    font-size: 32px;
+    color: white;
+    margin: 20px 100px 0;
+    position: absolute; }
+  .new-post-interface .new-post-form {
+    position: absolute;
+    width: 50%;
+    padding-left: 90px;
+    height: auto;
+    left: 0;
+    top: 100px; }
+    .new-post-interface .new-post-form .sudo-input, .new-post-interface .new-post-form .new-post-title, .new-post-interface .new-post-form .new-post-main-text {
+      background-color: #FFFFFF;
+      position: relative;
+      min-width: 100px;
+      min-height: 20px;
+      margin: 10px;
+      border-radius: 5px;
+      padding: 10px; }
+      .new-post-interface .new-post-form .sudo-input:focus, .new-post-interface .new-post-form .new-post-title:focus, .new-post-interface .new-post-form .new-post-main-text:focus {
+        border: 0;
+        outline: 0; }
+    .new-post-interface .new-post-form .new-post-title {
+      font-size: 24px; }
+    .new-post-interface .new-post-form .new-post-main-text {
+      font-size: 20px;
+      height: 400px; }
+  .new-post-interface .new-post-media {
+    position: relative;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    margin: 0px;
+    top: 0px; }
+    .new-post-interface .new-post-media .new-post-media-buttons {
+      list-style: none;
+      margin: 0 auto; }
+    .new-post-interface .new-post-media .new-post-media-container {
+      position: absolute;
+      height: 40%;
+      width: 70%;
+      left: 15%;
+      top: 30%;
+      display: block; }
+      .new-post-interface .new-post-media .new-post-media-container #new-post-map {
+        height: 100%;
+        width: 100%;
+        position: absolute; }
+  .new-post-interface .new-post-controls {
+    position: relative;
+    margin: 0 auto;
+    height: auto;
+    width: 325px;
+    z-index: 500000000; }
+
+.notify-button, .new-post-interface .new-post-controls .new-post-button {
+  margin: 10px;
+  width: 140px;
+  height: 50px;
+  float: left;
+  background-color: #009ADF;
+  border-radius: 2px;
+  padding-top: 10px;
+  text-align: center;
+  font-size: 20px;
+  color: white; }
+  .notify-button:hover, .new-post-interface .new-post-controls .new-post-button:hover {
+    cursor: pointer; }
+  .notify-button:active, .new-post-interface .new-post-controls .new-post-button:active {
+    background-color: #0077ac; }

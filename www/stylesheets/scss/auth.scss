@@ -1,0 +1,21 @@
+.auth-page {
+	position: absolute;
+	height: 1000px;
+	width: 100%;
+	top: 0px;
+	left: 0px;
+	background-color: rgba(0,0,0,0.45);
+
+    .auth-container {
+        z-index: 500000000000;
+        height: 500px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 5px 1px;
+        width: 750px;
+        left: calc((100% - 750px)/2);
+        background-color: #FFFFFF;
+        top: 150px;
+        position: absolute;
+        margin: 0 auto 0 auto;
+    }
+}

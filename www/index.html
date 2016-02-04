@@ -6,29 +6,68 @@
     <title>Notify</title>
     <!-- Styles -->
     <link rel="stylesheet" href="/stylesheets/css/account.css">
+    <link rel="stylesheet" href="/stylesheets/css/newPost.css">
+    <link rel="stylesheet" href="/stylesheets/css/home.css">
+    <link rel="stylesheet" href="/stylesheets/css/auth.css">
+    <link rel="stylesheet" href="/stylesheets/vendor/landing-page.css">
+    <link rel="stylesheet" href="/lib/ng-trans.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="lib/leaflet/dist/leaflet.css">
     <!--Resources-->
     <script type="text/javascript" src="lib/angular/angular.min.js"></script>
     <script type="text/javascript" src="lib/angular-route/angular-route.min.js"></script>
+    <!-- Animation -->
+    <script type="text/javascript" src="lib/angular-animate/angular-animate.js"></script>
+    <!-- Leaflet JS-->
+    <script type="text/javascript" src="lib/leaflet/dist/leaflet.js"></script>
+    <script type="text/javascript" src="lib/angular-leaflet-directive/dist/angular-leaflet-directive.min.js"></script>
     <script type="text/javascript" src="lib/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="lib/animate.css/animate.css" />
+
     <!-- Load our angular project -->
     <script type="text/javascript" src="app/app.js"></script>
     <script type="text/javascript" src="app/controllers/MainController.js"></script>
+    <script type="text/javascript" src="app/controllers/FeatureController.js"></script>
     <script type="text/javascript" src="app/services/MainService.js"></script>
     <base href="/">
   </head>
   <body ng-app="notify">
-    <div class="nav-bar">
-    <div class="logo">
-      NOTIFY
-      </div>
-      <ul>
-        <li><a href="#/account"> Account </a></li>
-        <li><a href="#/login"> Login </a></li>
-        <li><a href="#/register"> Register</a></li>
-      </ul>
-    </div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation" ng-controller="NavController">
+    <ng-include src="'templates/auth.html'" ng-show="auth.showAuthForm" class="ng-trans ng-trans-fade"></ng-include>
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="#">NOTIFY</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#/account">Account</a>
+                    </li>
+                    <li ng-click="auth.toggleAuthForm()">
+                        <a>Login</a>
+                    </li>
+                    <li>
+                        <a href="#contact">About</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
     <div ng-view></div>
   </body>
 </html>

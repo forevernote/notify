@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Set geocoderProvider Options
 const geocodeOptions = {
   geocoderProvider: 'google',
-  httpAdapter:'http',
+  httpAdapter: 'http',
   extra: {
     // apiKey: 'YOUR_API_KEY',
     formatter: 'gpx'
@@ -11,7 +11,8 @@ const geocodeOptions = {
 };
 
 // Create geocoder
-const geocoder = require('node-geocoder')(geocodeOptions.geocoderProvider, geocodeOptions.httpAdapter, geocodeOptions.extra);
+const geocoder = require('node-geocoder')(geocodeOptions.geocoderProvider,
+  geocodeOptions.httpAdapter, geocodeOptions.extra);
 
 
 const postSchema = mongoose.Schema({
@@ -19,7 +20,7 @@ const postSchema = mongoose.Schema({
   createdOn: Date,
   author_id: String,
   expires: Date,
-  content:{
+  content: {
     text: String,
     images: Array,
     date: Date,
@@ -29,8 +30,8 @@ const postSchema = mongoose.Schema({
     title: String,
     address: String,
     coords: {
-      lat: String,
-      lng: String
+      lat: Number,
+      lng: Number
     }
   }
 });
