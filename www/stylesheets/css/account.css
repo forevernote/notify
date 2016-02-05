@@ -51,14 +51,17 @@ body {
     border-right: 1px inset rgba(0, 0, 0, 0.2); }
     .page-container .user-info .user-image {
       position: relative;
-      height: 150px;
-      width: 150px;
+      height: 200px;
+      width: 200px;
       border-radius: 50%;
       background-color: white;
       border: 1px inset rgba(0, 0, 0, 0.2);
       margin: 0 auto;
       background-color: #FFFFFFF;
-      top: 25px; }
+      top: 0px;
+      background-image: url(../../img/tyler.jpg);
+      background-size: 100% 110%;
+      background-position: 20% 20%; }
     .page-container .user-info .user-controls {
       height: 150px;
       width: auto;
