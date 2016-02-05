@@ -16,7 +16,7 @@ const geocoder = require('node-geocoder')(geocodeOptions.geocoderProvider,
 
 const postSchema = mongoose.Schema({
   title: String,
-  createdOn: Date,
+  createdOn: String,
   author_id: String,
   expires: Date,
   content: {
