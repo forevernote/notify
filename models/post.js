@@ -14,7 +14,6 @@ const geocodeOptions = {
 const geocoder = require('node-geocoder')(geocodeOptions.geocoderProvider,
   geocodeOptions.httpAdapter, geocodeOptions.extra);
 
-
 const postSchema = mongoose.Schema({
   title: String,
   createdOn: Date,
@@ -35,6 +34,5 @@ const postSchema = mongoose.Schema({
     }
   }
 });
-
 
 module.exports = exports = mongoose.model('Post', postSchema);

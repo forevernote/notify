@@ -53,18 +53,14 @@ angular.module('MainController', [])
     }
   })
   .controller('AccountController', function($scope, Post, $rootScope, Broadcast, $timeout) {
-    // List of all posts
-    $scope.allPosts = [];
-    // Empty object for updating post
-    $scope.updatePost = {};
-    //
-    $scope.selectedItemId = null;
 
+    $scope.allPosts = [];     // List of all posts
+    $scope.updatePost = {};   // Empty object for updating post
+    $scope.selectedItemId = null;
 
     $scope.$on('NEWEVENTLOADED', function() {
       $scope.viewerInclude.url = '';
       $scope.viewerInclude.showInclude = false;
-
     });
 
     // For selecting map/images/other within post viewer
@@ -81,9 +77,8 @@ angular.module('MainController', [])
             if (templateUrl == 'templates/map.html') {
               console.log('Clicked');
               $timeout(function(){
-                Broadcast.emit('MAPBUTTONCLICKED', $scope.post);  
+                Broadcast.emit('MAPBUTTONCLICKED', $scope.post);
               }, 50);
-              
             }
           }
         }
@@ -108,7 +103,6 @@ angular.module('MainController', [])
       })
 
       $scope.selectedItemId = id;
-
       Broadcast.emit('NEWEVENTLOADED', $scope.post);
     };
 
@@ -143,7 +137,6 @@ angular.module('MainController', [])
         this.newPost = {};
       }
     };
-
 
     // Delete Post Controls
     $scope.deletePostControls = {
@@ -193,14 +186,10 @@ angular.module('MainController', [])
     $scope.$on('POSTUPDATED', function() {
       if ($scope.allPosts.length) {
 
-
       }
       $scope.getAllPosts();
-
     })
-
   })
-
 
 // DIRECTIVES
 .directive("contenteditable", function() {
