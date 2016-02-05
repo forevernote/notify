@@ -1,20 +1,18 @@
 <div class='auth-page'>
 	<div class="auth-container">
-		<!-- Handles loggin in  -->
-
-		<div class="login-container" ng-controller="LoginController">This is the login page>
+		<div class="closeInterface" ng-click="auth.showAuthForm = false">&times;</div>
+		<div class="login-container" ng-controller="LoginController">Already a user? Login below!
 			<form>
-				<input type="text" name="email" ng-model="login.email" placeholder="Email">
-				<input type="password" name="password" ng-model="login.password" placeholder="Password">
-				<button ng-click="loginUser()"> Login </button>
+				<input type="text" name="email" ng-model="login.email" placeholder="Email"><br/>
+				<input type="password" name="password" ng-model="login.password" placeholder="Password"><br/>
+				<button ng-click="loginUser()"> Login </button>owsh
 			</form>
 		</div>
-		<!-- Handles Registering -->
-		<div class="register-controller" ng-controller="RegisterController">
+		OR
+		<div class="register-controller" ng-controller="RegisterController">Create a new account!
 			<form>
-				<input type="text" placeholder="Email" name="email" ng-model="register.email">
-				<br />
-				<input type="password" placeholder="Password" name="password" ng-model="register.password">
+				<input type="text" placeholder="Email" name="email" ng-model="register.email"><br/>
+				<input type="password" placeholder="Password" name="password" ng-model="register.password"><br/>
 				<button ng-click="registerUser()">Register</button>
 			</form>
 		</div>
