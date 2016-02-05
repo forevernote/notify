@@ -56,7 +56,6 @@ describe('user routes', () => {
         .get('/user/posts')
         .set('token', userToken)
         .end((err,res) => {
-          console.log(typeof res.body.posts);
           expect(err).to.eql(null);
           expect(res.body.msg).to.eql('All posts retrieved');
           expect(Array.isArray(res.body.posts)).to.eql(true);
