@@ -2,13 +2,13 @@
 	<div class="auth-container">
 		<div class="closeInterface" ng-click="auth.showAuthForm = false">&times;</div>
 		<ul>
-			<li ng-click="login = true">Login</li>
-			<li ng-click="login = false">Register</li>
+			<li ng-click="loginShow = true">Login</li>
+			<li ng-click="loginShow = false">Register</li>
 		</ul>
 		<br/>
 		
 
-	<div ng-show="login">
+	<div ng-show="loginShow">
 		<div class="login-container auth-box"  ng-controller="LoginController">
 		<p>Login to Existing User</p>
 			<form>
@@ -18,8 +18,8 @@
 			</form>
 		</div>
 	</div>
-	<div ng-show="!login">
-		<div class="register-container auth-box" ng-show="!login" ng-controller="RegisterController"><p>Create a new account!</p>
+	<div ng-show="!loginShow">
+		<div class="register-container auth-box" ng-controller="RegisterController"><p>Create a new account!</p>
 			<form>
 				<input type="text" class="sudo-input" placeholder="Email" name="email" ng-model="register.email"><br/>
 				<input type="password" class="sudo-input" placeholder="Password" name="password" ng-model="register.password"><br/>
