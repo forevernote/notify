@@ -1,7 +1,6 @@
 <div class="page-container">
 	<!-- User info -->
 	<div class="user-info">
-
 		<div class="user-image"></div>
 		<ul class="user-controls">
 			<li class="user-control-button">Account Settings</li>
@@ -9,70 +8,84 @@
 			<li class="user-control-button">Account Settings</li>
 			<li class="user-control-button">Account Settings</li>
 		</ul>
+		
 	</div>
 	<!-- Post Viewer Controls -->
 	<div class="post-controls">
-		Post Control
 		<div class="post-control-button-container">
 			<ul class="button-list">
-				<li ng-click="newPostControls.togglePostInterface()" class="post-control-button" >New Post</li>
-				<li ng-click="" class="post-control-button">New Post</li>
-				<li ng-click="" class="post-control-button">New Post</li>
-				<li ng-click="" class="post-control-button">New Post</li>
+				<li ng-click="newPostControls.togglePostInterface()" class="post-control-button">New Post</li>
+				<li class="post-control-button" ng-class="{unavailable: !post.location.coords.lat}" ng-click="viewerInclude.changeIncludeUrl('templates/map.html')">Show Map</li>
+				<li ng-click="updatePostControls.togglePostInterface()" ng-class="{unavailable: !post}" class="post-control-button">Edit Post</li>
+				<li ng-click="deletePostControls.delete()" ng-class="{unavailable: !post}" class="post-control-button">Delete</li>
 			</ul>
 		</div>
 	</div>
 	<!-- Post Previews -->
 	<div class="post-preview-container">
+		<div class="post-search">
+			<input type="search" ng-model="search" placeholder="Search…">
+		</div>
+		
 		<div class="post-preview-inside">
-			<div class="post-preview" ng-class="{selected: $index==selectedIndex}" ng-click="showPost($index)" ng-repeat="post in allPosts | filter:{ createdOn:  createdOn}">
+			<div ng-class="{selected: post._id == selectedItemId}" ng-click="showPost(post._id)" ng-repeat="post in allPosts | filter:search" class="ng-trans ng-trans-fade-up post-preview">
 				<div class="post-preview-title">
-					{{post.title}}<a ng-click="updatePostControls.getOnePost($index)">Edit</a><a>Delete</a>
+					{{post.title}}
 				</div>
 				<div class="post-preview-date">
 					{{post.createdOn}}
 				</div>
 			</div>
+			 <div class="post-search" style="background-color: white; border: none"></div>
 		</div>
 	</div>
 	<!-- Post Viewer -->
 	<div class="post-viewer">
-		<div class="post-viewer-title">
-			{{post.title}}
+		<div class="post-viewer-content">
+			<div class="post-viewer-title">
+				{{post.title}}
+			</div>
+			<div class="post-viewer-text">
+				{{post.content.text}}
+			</div>
 		</div>
-		<div class="post-viewer-text">
-		{{post.content.text}}
+		<div class="post-viewer-media" ng-show="viewerInclude.showInclude">
+			<ng-include src="viewerInclude.url">
 		</div>
 	</div>
+	<!-- End of Page Container -->
 </div>
+<!-- Create New Post -->
 <div ng-show="newPostControls.interfaceIsOpen" class="new-post-interface">
 	<div class="new-post-interface-title">Create A New Post</div>
 	<div class="new-post-form">
-		<div class="new-post-title" ng-model="newPostControls.newPost.title" placeholder="Title" contenteditable>
-
-		</div>
-		<div class="new-post-main-text" ng-model="newPostControls.newPost.content.text" contenteditable> </div>
+		<input  type="text" class="new-post-title" ng-model="newPostControls.newPost.title" placeholder="Title">
+		<textarea type="text" class="new-post-main-text" ng-model="newPostControls.newPost.content.text"> </textarea>
 	</div>
 	<div class="closeInterface" ng-click="newPostControls.togglePostInterface()">&times;</div>
+	<div class="new-post-media">
+		<ul class="new-post-media-buttons">
+			<li class="post-media-button notify-button" ng-click="mediaInclude.showMediaInclude('templates/post-map.html')"> Add Location</li>
+			<li class="post-media-button notify-button" ng-click="mediaInclude.showMediaInclude('templats/file-upload.html')">Add Files</li>
+		</ul>
+		<ng-include src="mediaInclude.url">
+	</div>
 	<div class="new-post-controls">
-		<div class="new-post-button" ng-click="newPostControls.clearPost()">
+		<div type="text" class="new-post-button" ng-click="newPostControls.clearPost()">
 			CLEAR
 		</div>
-		<div class="new-post-button" ng-click="newPostControls.sendPost()">
+		<div type="text" class="new-post-button" ng-click="newPostControls.sendPost()">
 			ENTER
 		</div>
-
-
 	</div>
 </div>
-
+<!-- Update Post -->
 <div ng-show="updatePostControls.updateIsOpen" class="new-post-interface">
 	<div class="new-post-interface-title">Update post</div>
 	<div class="new-post-form">
-		<div class="new-post-title" ng-model="updatePostControls.title" placeholder="Title" contenteditable>
-
+		<div class="new-post-title" ng-model="post.title" placeholder="Title" contenteditable>
 		</div>
-		<div class="new-post-main-text" ng-model="updatePostControls.content" contenteditable> </div>
+		<div class="new-post-main-text" ng-model="post.content.text" contenteditable> </div>
 	</div>
 	<div class="closeInterface" ng-click="updatePostControls.togglePostInterface()">&times;</div>
 	<div class="new-post-controls">
@@ -82,7 +95,5 @@
 		<div class="new-post-button" ng-click="updatePostControls.updateThePost()">
 			ENTER
 		</div>
-
-
 	</div>
 </div>

@@ -1,25 +1,25 @@
 {
   "name": "notify",
   "version": "1.0.0",
-  "description": "A note-taking, calendar, and online journal all rolled into one.",
+  "description": "Notify: never forget your great ideas again with journal entries, lists, business plans, and photos. Remember that special place with geographical identification!",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/samheutmaker/notify.git"
+    "url": "git+https://github.com/forevernote/notify.git"
   },
   "keywords": [
     "journal",
     "map"
   ],
-  "author": "samheutmaker@gmail.com",
+  "author": "Sam Heutmaker, Chris Lee, Ardian Ajvazi, Rob Merrill, Erika Hokanson",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/samheutmaker/notify/issues"
+    "url": "https://github.com/forevernote/notify/issues"
   },
-  "homepage": "https://github.com/samheutmaker/notify#readme",
+  "homepage": "https://github.com/forevernote/notify#readme",
   "dependencies": {
     "bcrypt": "^0.8.5",
     "body-parser": "^1.14.2",

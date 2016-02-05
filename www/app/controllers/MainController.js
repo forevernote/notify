@@ -1,9 +1,23 @@
 angular.module('MainController', [])
 
+.controller('NavController', function($scope, $rootScope) {
+  $scope.auth = {
+    showAuthForm: false,
+    toggleAuthForm: function() {
+      console.log('CLicked');
+
+      this.showAuthForm = !this.showAuthForm;
+      console.log(this.showAuthForm);
+    }
+  };
+})
+
 .controller('HomeController', function($scope) {
-  console.log('home page');
+  console.log('HomeController');
+  // Handles showing and hiding auth form
 })
   .controller('RegisterController', function($scope, Auth, $window, $location) {
+    console.log('Register Controller');
 
     $scope.register = {
       email: '',
@@ -23,6 +37,7 @@ angular.module('MainController', [])
 
   })
   .controller('LoginController', function($scope, Auth, $window, $location) {
+    console.log('Login Controller');
 
     $scope.loginUser = function() {
 
@@ -37,35 +52,88 @@ angular.module('MainController', [])
       });
     }
   })
-  .controller('AccountController', function($scope, Post, $rootScope) {
-
+  .controller('AccountController', function($scope, Post, $rootScope, Broadcast, $timeout) {
+    // List of all posts
     $scope.allPosts = [];
-
+    // Empty object for updating post
     $scope.updatePost = {};
+    //
+    $scope.selectedItemId = null;
 
 
-    $scope.showPost = function(index){
-      $scope.post = $scope.allPosts[index];
-      $scope.selectedIndex = index;
+    $scope.$on('NEWEVENTLOADED', function() {
+      $scope.viewerInclude.url = '';
+      $scope.viewerInclude.showInclude = false;
+
+    });
+
+    // For selecting map/images/other within post viewer
+    $scope.viewerInclude = {
+      url: '',
+      changeIncludeUrl: function(templateUrl) {
+        if ($scope.post.location) {
+          if (templateUrl == this.url) {
+            this.showInclude = false
+            this.url = '';
+          } else {
+            this.url = templateUrl;
+            this.showInclude = true;
+            if (templateUrl == 'templates/map.html') {
+              console.log('Clicked');
+              $timeout(function(){
+                Broadcast.emit('MAPBUTTONCLICKED', $scope.post);  
+              }, 50);
+              
+            }
+          }
+        }
+      },
+      showInclude: false
     };
 
-    $scope.selectedIndex = null;
+    // For including Media with a post
+    $scope.mediaInclude = {
+      url: '',
+      showMediaInclude: function(templateUrl) {
+        this.url = templateUrl;
+      }
+    }
 
+    // Show post when clicked in Preview
+    $scope.showPost = function(id) {
+      $scope.allPosts.forEach(function(currentPost, postIndex) {
+        if (currentPost._id == id) {
+          $scope.post = currentPost
+        }
+      })
 
+      $scope.selectedItemId = id;
+
+      Broadcast.emit('NEWEVENTLOADED', $scope.post);
+    };
+
+    // Listen for Map Click Event to Add to NEW POST
+    $scope.$on('LocationAdded', function(event, latlng) {
+      $scope.newPostControls.newPost.location.coords = latlng;
+    });
+
+    // Controls for creating a new post
     $scope.newPostControls = {
       interfaceIsOpen: false,
-      newPost: {},
+      newPost: {
+        location: {}
+      },
       togglePostInterface: function() {
         this.interfaceIsOpen = !this.interfaceIsOpen;
       },
       sendPost: function() {
         Post.createPost(this.newPost).then((data) => {
-            // Clear Form
-            this.clearPost();
-            // Broadcast POST UPDATED
-            $rootScope.$broadcast('POSTUPDATED');
-            this.togglePostInterface();
-            console.log(data);
+          // Clear Form
+          this.clearPost();
+          // Broadcast POST UPDATED
+          $rootScope.$broadcast('POSTUPDATED');
+          this.togglePostInterface();
+          console.log(data);
         }, function(err) {
           console.log('Error');
           console.log(err);
@@ -76,50 +144,41 @@ angular.module('MainController', [])
       }
     };
 
+
+    // Delete Post Controls
+    $scope.deletePostControls = {
+      delete: function() {
+        Post.deletePost($scope.post).then(function(data) {
+          console.log('Delete Successful');
+          $scope.post = null;
+          $rootScope.$broadcast('POSTUPDATED');
+        }, function(err) {
+          console.log('Failed to delete');
+        })
+      }
+    };
+
     $scope.updatePostControls = {
       updateIsOpen: false,
       updateNewPost: {},
       togglePostInterface: function() {
-        this.updateIsOpen = !this.updateIsOpen;
+        if ($scope.post) {
+          this.updateIsOpen = !this.updateIsOpen;
+        }
       },
-      getOnePost: function(index) {
-        this.updateIsOpen = true;
-        $scope.post = $scope.allPosts[index];
-        updateNewPost = $scope.post;
-        var title = $scope.post.title;
-        var desc = $scope.post.content.text;
-        $scope.updatePostControls.title = title;
-        $scope.updatePostControls.content = desc;
-        console.log(title + '  ' + desc);
-      },
-      updateThePost: function(){
-        $scope.post.title = $scope.updatePostControls.title;
-        $scope.post.content.text = $scope.updatePostControls.content;
+      updateThePost: function() {
         Post.updatePost($scope.post).then((data) => {
-            // Clear Form
-            this.clearPost();
-            // Broadcast POST UPDATED
-            $rootScope.$broadcast('POSTUPDATED');
-            this.togglePostInterface();
-            console.log(data);
-        }, function(err) {
-          console.log('Error');
-          console.log(err);
-        })
+          // Clear Form
+          this.clearPost();
+          // Broadcast POST UPDATED
+          $rootScope.$broadcast('POSTUPDATED');
+          this.togglePostInterface();
+        }, function(err) {})
       },
       clearPost: function() {
-        this.updateNewPost = {};
+        $scope.post = $scope.post;
       }
     }
-
-    $scope.editPost = function() {
-      //console.log('clicked');
-
-      Post.updatePost($scope.updatePost).then(function(data) {
-        console.log(data);
-      });
-
-    };
 
     $scope.getAllPosts = function() {
       Post.getPost().then(function(res) {
@@ -131,8 +190,13 @@ angular.module('MainController', [])
     // Get all Posts when page first loads
     $scope.getAllPosts();
 
-    $scope.$on('POSTUPDATED', function(){
+    $scope.$on('POSTUPDATED', function() {
+      if ($scope.allPosts.length) {
+
+
+      }
       $scope.getAllPosts();
+
     })
 
   })
