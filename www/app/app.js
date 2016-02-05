@@ -6,8 +6,8 @@ angular.module('notify', ['ngRoute', 'MainController', 'FeatureController',
 	})
 	.run(function($rootScope, $location, $window) {
 		$rootScope.$on('$routeChangeStart', function(event, next) {
-
-			if (!$window.sessionStorage.token && next.isLogin) $location.url('/register');
+			// if user is not authenticated and trying to access secure page, redirect to homepage
+			if (!$window.sessionStorage.token && next.isLogin) $location.url('/');
 			else $location.url(next.originalPath);
 
 		});

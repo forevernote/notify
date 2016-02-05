@@ -2,13 +2,13 @@
 	<!-- User info -->
 	<div class="user-info">
 		<div class="user-image"></div>
-		<ul class="user-controls">
+		<!-- <ul class="user-controls">
 			<li class="user-control-button">Account Settings</li>
 			<li class="user-control-button">Account Settings</li>
 			<li class="user-control-button">Account Settings</li>
 			<li class="user-control-button">Account Settings</li>
-		</ul>
-		
+		</ul> -->
+
 	</div>
 	<!-- Post Viewer Controls -->
 	<div class="post-controls">
@@ -26,7 +26,7 @@
 		<div class="post-search">
 			<input type="search" ng-model="search" placeholder="Search…">
 		</div>
-		
+
 		<div class="post-preview-inside">
 			<div ng-class="{selected: post._id == selectedItemId}" ng-click="showPost(post._id)" ng-repeat="post in allPosts | filter:search" class="ng-trans ng-trans-fade-up post-preview">
 				<div class="post-preview-title">

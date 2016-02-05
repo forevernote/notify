@@ -56,11 +56,11 @@
                     <li>
                         <a href="#/account">Account</a>
                     </li>
-                    <li ng-click="auth.toggleAuthForm()">
-                        <a>Login</a>
+                    <li ng-show="!isUserLoggedIn">
+                        <a ng-click="auth.toggleAuthForm()">Login</a>
                     </li>
-                    <li>
-                        <a href="#contact">About</a>
+                    <li ng-show="isUserLoggedIn">
+                        <a ng-click="logout()">Logout</a>
                     </li>
                 </ul>
             </div>

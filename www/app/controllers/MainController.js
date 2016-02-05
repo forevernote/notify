@@ -1,22 +1,29 @@
 angular.module('MainController', [])
 
-.controller('NavController', function($scope, $rootScope) {
-  $scope.auth = {
+.controller('NavController', function($scope, $rootScope, $window, $location) {
+  $rootScope.auth = {
     showAuthForm: false,
     toggleAuthForm: function() {
       console.log('CLicked');
 
       this.showAuthForm = !this.showAuthForm;
-      console.log(this.showAuthForm);
+      // console.log(this.showAuthForm);
     }
   };
+  $rootScope.isUserLoggedIn = false;
+  $rootScope.logout = function() {
+    $window.sessionStorage.token = '';  // reset sessionStorage token
+    $rootScope.isUserLoggedIn = false;
+    console.log($rootScope.isUserLoggedIn);
+    $location.url('/');          // redirect to homepage
+  }
 })
 
 .controller('HomeController', function($scope) {
   console.log('HomeController');
   // Handles showing and hiding auth form
 })
-  .controller('RegisterController', function($scope, Auth, $window, $location) {
+  .controller('RegisterController', function($scope, $rootScope, Auth, $window, $location) {
     console.log('Register Controller');
 
     $scope.register = {
@@ -28,6 +35,8 @@ angular.module('MainController', [])
       Auth.register($scope.register).then(function(res) {
         if (res.data.token) {
           $window.sessionStorage.token = res.data.token;
+          $rootScope.isUserLoggedIn = true;   // results in login btn hiding, logout btn showing
+          $rootScope.auth.showAuthForm = false; // makes login form disappear
           $location.url('/account');
         }
       }, function(err) {
@@ -36,7 +45,7 @@ angular.module('MainController', [])
     }
 
   })
-  .controller('LoginController', function($scope, Auth, $window, $location) {
+  .controller('LoginController', function($scope, $rootScope, Auth, $window, $location) {
     console.log('Login Controller');
 
     $scope.loginUser = function() {
@@ -47,6 +56,8 @@ angular.module('MainController', [])
         // if the token exists, store it in session storage and redirect to account page
         if (res.data.token) {
           $window.sessionStorage.token = res.data.token;
+          $rootScope.isUserLoggedIn = true;   // results in login btn hiding, logout btn showing
+          $rootScope.auth.showAuthForm = false; // makes login form disappear
           $location.url('/account');
         }
       });
