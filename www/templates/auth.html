@@ -1,22 +1,31 @@
 <div class='auth-page'>
 	<div class="auth-container">
-		<!-- Handles loggin in  -->
+		<div class="closeInterface" ng-click="auth.showAuthForm = false">&times;</div>
+		<ul>
+			<li ng-click="loginShow = true">Login</li>
+			<li ng-click="loginShow = false">Register</li>
+		</ul>
+		<br/>
+		
 
-		<div class="login-container" ng-controller="LoginController">This is the login page>
+	<div ng-show="loginShow">
+		<div class="login-container auth-box"  ng-controller="LoginController">
+		<p>Login to Existing User</p>
 			<form>
-				<input type="text" name="email" ng-model="login.email" placeholder="Email">
-				<input type="password" name="password" ng-model="login.password" placeholder="Password">
-				<button ng-click="loginUser()"> Login </button>
+				<input type="text" name="email" class="sudo-input" ng-model="login.email" placeholder="Email"><br/>
+				<input type="password" name="password" class="sudo-input" ng-model="login.password" placeholder="Password"><br/>
+				<div  class="auth-button" ng-click="loginUser()"> Login </div>
 			</form>
 		</div>
-		<!-- Handles Registering -->
-		<div class="register-controller" ng-controller="RegisterController">
+	</div>
+	<div ng-show="!loginShow">
+		<div class="register-container auth-box" ng-controller="RegisterController"><p>Create a new account!</p>
 			<form>
-				<input type="text" placeholder="Email" name="email" ng-model="register.email">
-				<br />
-				<input type="password" placeholder="Password" name="password" ng-model="register.password">
-				<button ng-click="registerUser()">Register</button>
+				<input type="text" class="sudo-input" placeholder="Email" name="email" ng-model="register.email"><br/>
+				<input type="password" class="sudo-input" placeholder="Password" name="password" ng-model="register.password"><br/>
+				<div class="auth-button" ng-click="registerUser()">Register</div>
 			</form>
+		</div>
 		</div>
 	</div>
 </div>

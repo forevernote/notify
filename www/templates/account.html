@@ -2,22 +2,22 @@
 	<!-- User info -->
 	<div class="user-info">
 		<div class="user-image"></div>
-		<ul class="user-controls">
+		<!-- <ul class="user-controls">
 			<li class="user-control-button">Account Settings</li>
 			<li class="user-control-button">Account Settings</li>
 			<li class="user-control-button">Account Settings</li>
 			<li class="user-control-button">Account Settings</li>
-		</ul>
-		
+		</ul> -->
+
 	</div>
 	<!-- Post Viewer Controls -->
 	<div class="post-controls">
 		<div class="post-control-button-container">
 			<ul class="button-list">
 				<li ng-click="newPostControls.togglePostInterface()" class="post-control-button">New Post</li>
-				<li class="post-control-button" ng-show="post.location.coords" ng-click="viewerInclude.changeIncludeUrl('templates/map.html')">Show Map</li>
-				<li ng-click="updatePostControls.togglePostInterface()" class="post-control-button">Edit Post</li>
-				<li ng-click="deletePostControls.delete()" class="post-control-button">Delete</li>
+				<li class="post-control-button" ng-class="{unavailable: !post.location.coords.lat}" ng-click="viewerInclude.changeIncludeUrl('templates/map.html')">Show Map</li>
+				<li ng-click="updatePostControls.togglePostInterface()" ng-class="{unavailable: !post}" class="post-control-button">Edit Post</li>
+				<li ng-click="deletePostControls.delete()" ng-class="{unavailable: !post}" class="post-control-button">Delete</li>
 			</ul>
 		</div>
 	</div>
@@ -26,7 +26,7 @@
 		<div class="post-search">
 			<input type="search" ng-model="search" placeholder="Search…">
 		</div>
-		
+
 		<div class="post-preview-inside">
 			<div ng-class="{selected: post._id == selectedItemId}" ng-click="showPost(post._id)" ng-repeat="post in allPosts | filter:search" class="ng-trans ng-trans-fade-up post-preview">
 				<div class="post-preview-title">
@@ -48,10 +48,6 @@
 			<div class="post-viewer-text">
 				{{post.content.text}}
 			</div>
-			<div class="post-viewer-title">
-				{{post.location.coords.lat}}
-				{{post.location.coords.lng}}
-			</div>
 		</div>
 		<div class="post-viewer-media" ng-show="viewerInclude.showInclude">
 			<ng-include src="viewerInclude.url">
@@ -63,9 +59,8 @@
 <div ng-show="newPostControls.interfaceIsOpen" class="new-post-interface">
 	<div class="new-post-interface-title">Create A New Post</div>
 	<div class="new-post-form">
-		<div  type="text" class="new-post-title" ng-model="newPostControls.newPost.title" placeholder="Title" contenteditable>
-		</div>
-		<div type="text" class="new-post-main-text" ng-model="newPostControls.newPost.content.text" contenteditable> </div>
+		<input  type="text" class="new-post-title" ng-model="newPostControls.newPost.title" placeholder="Title">
+		<textarea type="text" class="new-post-main-text" ng-model="newPostControls.newPost.content.text"> </textarea>
 	</div>
 	<div class="closeInterface" ng-click="newPostControls.togglePostInterface()">&times;</div>
 	<div class="new-post-media">

@@ -2,7 +2,7 @@
 The first project assignment for Code Fellows Seattle Full-Stack JavaScript 401, February 2016.
 Notify was inspired by the Evernote application but has a more minimalist design, targeted to different user needs.
 
-Notify is a two-resource REST app using the Express framework in combination with a Modulus Mongolabs database. Bootstrap and Angular are used on the frontend.
+Notify is a two-resource REST Node.js app using the Express framework connected to a Modulus database using Mongoose. Bootstrap and Angular are used on the frontend.
 
 ## Contents
 +   [API](https://github.com/forevernote/notify#api)
@@ -12,8 +12,9 @@ Notify is a two-resource REST app using the Express framework in combination wit
 
 
 ## API
-REST model (/api/user)
-```
+User Schema
+
+```js
 name: {
   first: String,
   last: String
@@ -28,9 +29,11 @@ authentication: {
   password: String
 }
 ```
-REST model (/api/post)
-```
-{
+Post Schema
+
+```js
+
+  }
   title: String,
   createdOn: Date,
   author_id: String,
@@ -48,7 +51,7 @@ REST model (/api/post)
       lat: Number,
       lng: Number
     }
-    ```
+  ```
 
 ## Dependencies
 
@@ -69,11 +72,12 @@ REST model (/api/post)
   "gulp-sass": "^2.1.1",
   "mocha": "^2.4.5",
   "nodemon": "^1.8.1"
+}
 ```
 
 ## Authors
 
-This server/router was written by [Sam Heutmaker](https://github.com/samheutmaker), [Chris Lee](https://github.com/clee46), [Ardian Ajvazi](https://github.com/ardianajvazi), [Rob Merrill](https://github.com/robgmerrill), and [Erika Hokanson](https://github.com/erikawho) as coursework for JavaScript 401 at Code Fellows.
+This app was written by [Sam Heutmaker](https://github.com/samheutmaker), [Chris Lee](https://github.com/clee46), [Ardian Ajvazi](https://github.com/ardianajvazi), [Rob Merrill](https://github.com/robgmerrill), and [Erika Hokanson](https://github.com/erikawho) as coursework for JavaScript 401 at Code Fellows.
 
 ## License
 

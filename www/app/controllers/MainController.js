@@ -1,22 +1,29 @@
 angular.module('MainController', [])
 
-.controller('NavController', function($scope, $rootScope) {
-  $scope.auth = {
+.controller('NavController', function($scope, $rootScope, $window, $location) {
+  $rootScope.auth = {
     showAuthForm: false,
     toggleAuthForm: function() {
       console.log('CLicked');
 
       this.showAuthForm = !this.showAuthForm;
-      console.log(this.showAuthForm);
+      // console.log(this.showAuthForm);
     }
   };
+  $rootScope.isUserLoggedIn = false;
+  $rootScope.logout = function() {
+    $window.sessionStorage.token = '';  // reset sessionStorage token
+    $rootScope.isUserLoggedIn = false;
+    console.log($rootScope.isUserLoggedIn);
+    $location.url('/');          // redirect to homepage
+  }
 })
 
 .controller('HomeController', function($scope) {
   console.log('HomeController');
   // Handles showing and hiding auth form
 })
-  .controller('RegisterController', function($scope, Auth, $window, $location) {
+  .controller('RegisterController', function($scope, $rootScope, Auth, $window, $location) {
     console.log('Register Controller');
 
     $scope.register = {
@@ -28,6 +35,8 @@ angular.module('MainController', [])
       Auth.register($scope.register).then(function(res) {
         if (res.data.token) {
           $window.sessionStorage.token = res.data.token;
+          $rootScope.isUserLoggedIn = true;   // results in login btn hiding, logout btn showing
+          $rootScope.auth.showAuthForm = false; // makes login form disappear
           $location.url('/account');
         }
       }, function(err) {
@@ -36,7 +45,7 @@ angular.module('MainController', [])
     }
 
   })
-  .controller('LoginController', function($scope, Auth, $window, $location) {
+  .controller('LoginController', function($scope, $rootScope, Auth, $window, $location) {
     console.log('Login Controller');
 
     $scope.loginUser = function() {
@@ -47,37 +56,48 @@ angular.module('MainController', [])
         // if the token exists, store it in session storage and redirect to account page
         if (res.data.token) {
           $window.sessionStorage.token = res.data.token;
+          $rootScope.isUserLoggedIn = true;   // results in login btn hiding, logout btn showing
+          $rootScope.auth.showAuthForm = false; // makes login form disappear
           $location.url('/account');
         }
       });
     }
   })
-  .controller('AccountController', function($scope, Post, $rootScope, Broadcast) {
-    // List of all posts
-    $scope.allPosts = [];
-    // Empty object for updating post
-    $scope.updatePost = {};
-    //
+  .controller('AccountController', function($scope, Post, $rootScope, Broadcast, $timeout) {
+
+    $scope.allPosts = [];     // List of all posts
+    $scope.updatePost = {};   // Empty object for updating post
     $scope.selectedItemId = null;
 
-    // For selecting map/images/other
+    $scope.$on('NEWEVENTLOADED', function() {
+      $scope.viewerInclude.url = '';
+      $scope.viewerInclude.showInclude = false;
+    });
+
+    // For selecting map/images/other within post viewer
     $scope.viewerInclude = {
       url: '',
-      changeIncludeUrl: function(templateUrl){
-        if(templateUrl == this.url) {
-          this.showInclude  = false
-          this.url = '';
-        } else {
-          if(templateUrl == 'templates/map.html') {
-            Broadcast.emit('MAPBUTTONCLICKED', $scope.post);
+      changeIncludeUrl: function(templateUrl) {
+        if ($scope.post.location) {
+          if (templateUrl == this.url) {
+            this.showInclude = false
+            this.url = '';
+          } else {
+            this.url = templateUrl;
+            this.showInclude = true;
+            if (templateUrl == 'templates/map.html') {
+              console.log('Clicked');
+              $timeout(function(){
+                Broadcast.emit('MAPBUTTONCLICKED', $scope.post);
+              }, 50);
+            }
           }
-          this.url = templateUrl;
-          this.showInclude = true;
         }
       },
       showInclude: false
     };
 
+    // For including Media with a post
     $scope.mediaInclude = {
       url: '',
       showMediaInclude: function(templateUrl) {
@@ -94,7 +114,6 @@ angular.module('MainController', [])
       })
 
       $scope.selectedItemId = id;
-
       Broadcast.emit('NEWEVENTLOADED', $scope.post);
     };
 
@@ -113,6 +132,12 @@ angular.module('MainController', [])
         this.interfaceIsOpen = !this.interfaceIsOpen;
       },
       sendPost: function() {
+        var currentDate = new Date();
+        var options = {
+          weekday: "long", year: "numeric", month: "short",
+          day: "numeric", hour: "2-digit", minute: "2-digit"
+        };
+        this.newPost.createdOn = currentDate.toLocaleTimeString('en-us', options);
         Post.createPost(this.newPost).then((data) => {
           // Clear Form
           this.clearPost();
@@ -130,6 +155,7 @@ angular.module('MainController', [])
       }
     };
 
+    // Delete Post Controls
     $scope.deletePostControls = {
       delete: function() {
         Post.deletePost($scope.post).then(function(data) {
@@ -146,7 +172,9 @@ angular.module('MainController', [])
       updateIsOpen: false,
       updateNewPost: {},
       togglePostInterface: function() {
-        this.updateIsOpen = !this.updateIsOpen;
+        if ($scope.post) {
+          this.updateIsOpen = !this.updateIsOpen;
+        }
       },
       updateThePost: function() {
         Post.updatePost($scope.post).then((data) => {
@@ -175,14 +203,10 @@ angular.module('MainController', [])
     $scope.$on('POSTUPDATED', function() {
       if ($scope.allPosts.length) {
 
-
       }
       $scope.getAllPosts();
-
     })
-
   })
-
 
 // DIRECTIVES
 .directive("contenteditable", function() {

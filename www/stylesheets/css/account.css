@@ -51,14 +51,17 @@ body {
     border-right: 1px inset rgba(0, 0, 0, 0.2); }
     .page-container .user-info .user-image {
       position: relative;
-      height: 150px;
-      width: 150px;
+      height: 200px;
+      width: 200px;
       border-radius: 50%;
       background-color: white;
       border: 1px inset rgba(0, 0, 0, 0.2);
       margin: 0 auto;
       background-color: #FFFFFFF;
-      top: 25px; }
+      top: 0px;
+      background-image: url(../../img/tyler.jpg);
+      background-size: 100% 110%;
+      background-position: 20% 20%; }
     .page-container .user-info .user-controls {
       height: 150px;
       width: auto;
@@ -106,6 +109,9 @@ body {
             cursor: pointer;
             background-color: white;
             color: #9b59b6; }
+        .page-container .post-controls .post-control-button-container .button-list .post-control-button.unavailable {
+          background-color: #ecf0f1;
+          color: #bdc3c7; }
   .page-container .post-preview-container {
     width: 500px;
     top: 200px;
@@ -113,8 +119,7 @@ body {
     height: calc(100% - 200px);
     background-color: #FFFFFF;
     overflow: hidden;
-    position: absolute;
-    border-right: 1px inset rgba(0, 0, 0, 0.2); }
+    position: absolute; }
     .page-container .post-preview-container .post-search {
       height: 40px;
       width: 100%;
@@ -163,13 +168,25 @@ body {
     color: black;
     top: 70px;
     left: 500px;
-    background-color: #FFFFFF;
+    background-image: url(../../img/pattern.png);
     height: calc(100% - 70px);
-    border-top: 1px inset rgba(0, 0, 0, 0.2); }
+    -webkit-box-shadow: inset 2px 2px 20px -3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: inset 2px 2px 20px -3px rgba(0, 0, 0, 0.75);
+    box-shadow: inset 2px 2px 20px -3px rgba(0, 0, 0, 0.75); }
     .page-container .post-viewer .post-viewer-content {
       height: 100%;
       position: absolute;
-      width: 50%; }
+      width: 50%;
+      overflow: scroll; }
+      .page-container .post-viewer .post-viewer-content .post-viewer-title {
+        margin: 50px;
+        position: relative;
+        font-size: 26px;
+        font-weight: bold; }
+      .page-container .post-viewer .post-viewer-content .post-viewer-text {
+        margin: 50px;
+        position: relative;
+        font-size: 20px; }
     .page-container .post-viewer .post-viewer-media {
       position: absolute;
       height: 100%;
@@ -224,7 +241,9 @@ body {
       min-height: 20px;
       margin: 10px;
       border-radius: 5px;
-      padding: 10px; }
+      padding: 10px;
+      border: 0px;
+      outline: 0px; }
       .new-post-interface .new-post-form .sudo-input:focus, .new-post-interface .new-post-form .new-post-title:focus, .new-post-interface .new-post-form .new-post-main-text:focus {
         border: 0;
         outline: 0; }
@@ -232,31 +251,38 @@ body {
       font-size: 24px; }
     .new-post-interface .new-post-form .new-post-main-text {
       font-size: 20px;
-      height: 400px; }
+      height: 400px;
+      width: auto;
+      min-width: 450px;
+      display: inline-block; }
   .new-post-interface .new-post-media {
     position: relative;
     left: 50%;
     width: 50%;
-    height: 100%;
+    height: 80%;
     margin: 0px;
     top: 0px; }
     .new-post-interface .new-post-media .new-post-media-buttons {
       list-style: none;
-      margin: 0 auto; }
+      margin: 0 auto;
+      position: relative;
+      width: 400px;
+      top: 100px; }
     .new-post-interface .new-post-media .new-post-media-container {
       position: absolute;
-      height: 40%;
-      width: 70%;
-      left: 15%;
-      top: 30%;
+      height: 400px;
+      width: 90%;
+      left: 5%;
+      top: 190px;
       display: block; }
       .new-post-interface .new-post-media .new-post-media-container #new-post-map {
         height: 100%;
         width: 100%;
         position: absolute; }
   .new-post-interface .new-post-controls {
-    position: relative;
-    margin: 0 auto;
+    position: absolute;
+    bottom: 50px;
+    left: calc((100% - 325px)/2);
     height: auto;
     width: 325px;
     z-index: 500000000; }
