@@ -132,6 +132,12 @@ angular.module('MainController', [])
         this.interfaceIsOpen = !this.interfaceIsOpen;
       },
       sendPost: function() {
+        var currentDate = new Date();
+        var options = {
+          weekday: "long", year: "numeric", month: "short",
+          day: "numeric", hour: "2-digit", minute: "2-digit"
+        };
+        this.newPost.createdOn = currentDate.toLocaleTimeString('en-us', options);
         Post.createPost(this.newPost).then((data) => {
           // Clear Form
           this.clearPost();
