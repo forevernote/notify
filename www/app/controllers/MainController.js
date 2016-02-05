@@ -81,9 +81,9 @@ angular.module('MainController', [])
             if (templateUrl == 'templates/map.html') {
               console.log('Clicked');
               $timeout(function(){
-                Broadcast.emit('MAPBUTTONCLICKED', $scope.post);  
+                Broadcast.emit('MAPBUTTONCLICKED', $scope.post);
               }, 50);
-              
+
             }
           }
         }
