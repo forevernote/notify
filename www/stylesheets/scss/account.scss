@@ -64,14 +64,17 @@ body {
 
         .user-image {
             position: relative;
-            height: 150px;
-            width: 150px;
+            height: 200px;
+            width: 200px;
             border-radius: 50%;
             background-color: white;
             border: 1px inset rgba(0, 0, 0, 0.2);
             margin: 0 auto;
             background-color: #FFFFFFF;
-            top: 25px;
+            top: 0px;
+            background-image: url(../../img/tyler.jpg);
+            background-size: 100% 110%;
+            background-position: 20% 20%;
         }
 
         .user-controls {
@@ -324,7 +327,7 @@ body {
             }
 
             // border: 1px solid rgba(0,0,0, 0.4);
-       
+
         }
 
         .new-post-title {
@@ -377,7 +380,7 @@ body {
     }
 
     .new-post-controls {
-        
+
         margin: 0 auto;
         height: auto;
         width: 325px;
