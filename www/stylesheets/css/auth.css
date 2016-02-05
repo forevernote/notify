@@ -16,3 +16,60 @@
     top: 150px;
     position: absolute;
     margin: 0 auto 0 auto; }
+    .auth-page .auth-container ul {
+      list-style: none;
+      position: relative;
+      width: 230px;
+      margin: 0 auto;
+      height: 20px; }
+      .auth-page .auth-container ul li {
+        float: left;
+        margin-left: 10px;
+        font-size: 22px; }
+        .auth-page .auth-container ul li:hover {
+          cursor: pointer;
+          text-decoration: underline; }
+    .auth-page .auth-container .auth-box {
+      height: 400px;
+      width: 400px;
+      position: relative;
+      margin: 0 auto;
+      top: 50px; }
+
+.auth-button {
+  margin: 10px auto;
+  width: 150px;
+  height: 50px;
+  background-color: lightblue;
+  border-radius: 5px;
+  position: relative;
+  padding-top: 15px;
+  border: 0px;
+  outline: 0px;
+  text-align: center; }
+  .auth-button:hover {
+    cursor: pointer; }
+  .auth-button:active {
+    background-color: #86c5da; }
+
+.closeInterface {
+  position: absolute;
+  font-size: 32px;
+  margin: 15px 20px 0;
+  z-index: 99999999; }
+  .closeInterface:hover {
+    cursor: pointer; }
+
+.sudo-input {
+  background-color: #FFFFFF;
+  position: relative;
+  min-width: 200px;
+  min-height: 10px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  left: 100px;
+  border-radius: 5px;
+  padding: 10px; }
+  .sudo-input:focus {
+    border: 0;
+    outline: 0; }
