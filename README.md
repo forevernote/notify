@@ -2,7 +2,7 @@
 The first project assignment for Code Fellows Seattle Full-Stack JavaScript 401, February 2016.
 Notify was inspired by the Evernote application but has a more minimalist design, targeted to different user needs.
 
-Notify is a two-resource REST Node.js app using the Express framework in combination with a Modulus Mongolabs database. Bootstrap and Angular are used on the frontend.
+Notify is a two-resource REST Node.js app using the Express framework connected to a Modulus database using Mongoose. Bootstrap and Angular are used on the frontend.
 
 ## Contents
 +   [API](https://github.com/forevernote/notify#api)
@@ -12,7 +12,7 @@ Notify is a two-resource REST Node.js app using the Express framework in combina
 
 
 ## API
-REST model (/api/user)
+User Schema
 
 ```js
 name: {
@@ -29,7 +29,7 @@ authentication: {
   password: String
 }
 ```
-REST model (/api/post)
+Post Schema
 
 ```js
 
