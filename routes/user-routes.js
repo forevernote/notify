@@ -9,7 +9,6 @@ const Post = require(__dirname + '/../models/post');
 
 var userRouter = module.exports = exports = express.Router();
 
-
 userRouter.get('/posts', authCheck, (req, res) => {
 	Post.find({
 		author_id: req.user._id

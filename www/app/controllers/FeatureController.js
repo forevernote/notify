@@ -7,7 +7,6 @@ angular.module('FeatureController', [])
 
     $scope.show = true;
 
-
     angular.extend($scope, {
       center: {
         lat: 47.6234626,
@@ -45,7 +44,7 @@ angular.module('FeatureController', [])
 
   $scope.$on('leafletDirectiveMap.new-post-map.click', function(event, args) {
 
-    // Get clikc event
+    // Get click event
     var clickEvent = args.leafletEvent;
 
     // Create new object from click event params
