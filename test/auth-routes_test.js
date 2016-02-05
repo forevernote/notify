@@ -18,14 +18,11 @@ describe('the authorization route', () => {
       done();
     });
   });
-
-  it('should create a new user with a POST requests', (done) => {
+  it('should create a new user with a POST request', (done) => {
     chai.request(baseUri)
       .post('/auth/register')
       .send({"email":"notify@codefellows.com", "password":"password"})
       .end((err, res) => {
-        userId = res.body.user._id;
-        userToken = res.body.token;
         expect(err).to.eql(null);
         expect(res).to.have.status(200);
         expect(res.body).to.have.property('token');
@@ -33,30 +30,40 @@ describe('the authorization route', () => {
         done();
       });
   });
-
-  it('should check if the user has valid credentials', (done) => {
-    chai.request(baseUri)
-      .get('/auth/login')
-      .auth("notify@codefellows.com", "password")
-      .end((err, res) => {
-        expect(err).to.eql(null);
-        expect(res).to.have.status(200);
-        expect(res.body).to.have.property('token');
-        expect(res.body).to.have.property('user');
+  describe('rest requests that require an existing user in the DB', () => {
+    beforeEach((done) => {
+      var newUser = new User();
+      newUser.authentication.email = 'chris@gmail.com';
+      newUser.hashPassword('password');
+      newUser.save((err, data) => {
+        userToken = data.generateToken();
+        userId = data._id;
         done();
       });
-  });
-
-  it('should be able to update a user', (done) => {
-    chai.request(baseUri)
-      .put('/auth/update/' + userId)
-      .set('token', userToken)
-      .send({authentication: {email: "notefellows@codefellows.com", password: "8675309"}})
-      .end((err, res) => {
-        expect(err).to.eql(null);
-        expect(res).to.have.status(200);
-        expect(res.body.msg).to.eql('User updated');
-        done();
-      });
+    });
+    it('should check if the user has valid credentials', (done) => {
+      chai.request(baseUri)
+        .get('/auth/login')
+        .auth("chris@gmail.com", "password")
+        .end((err, res) => {
+          expect(err).to.eql(null);
+          expect(res).to.have.status(200);
+          expect(res.body).to.have.property('token');
+          expect(res.body).to.have.property('user');
+          done();
+        });
+    });
+    it('should be able to update a user', (done) => {
+      chai.request(baseUri)
+        .put('/auth/update/' + userId)
+        .set('token', userToken)
+        .send({authentication: {email: "notefellows@codefellows.com", password: "8675309"}})
+        .end((err, res) => {
+          expect(err).to.eql(null);
+          expect(res).to.have.status(200);
+          expect(res.body.msg).to.eql('User updated');
+          done();
+        });
+    });
   });
 });
