@@ -2,3 +2,12 @@
 	position: relative;
 	top: 40px;
 }
+
+#mypic{
+	height: 250px;
+	width: 250px;
+}
+
+#mypic:hover {
+ animation: bounce 2s;
+}
