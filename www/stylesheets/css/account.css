@@ -280,7 +280,9 @@ body {
         width: 100%;
         position: absolute; }
   .new-post-interface .new-post-controls {
-    margin: 0 auto;
+    position: absolute;
+    bottom: 50px;
+    left: calc((100% - 325px)/2);
     height: auto;
     width: 325px;
     z-index: 500000000; }
