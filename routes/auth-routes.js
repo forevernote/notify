@@ -53,8 +53,6 @@ authRouter.post('/register', jsonParser, (req, res) => {
 authRouter.get('/login', basicHTTP, (req, res) => {
   // Check DB for user
   User.findOne({'authentication.email' : req.basicHTTP.email}, (err, user) => {
-    console.log(req.basicHTTP.email);
-    console.log(req.basicHTTP.password);
     // Check for error
     if(err) {
       return res.status(401).json({
