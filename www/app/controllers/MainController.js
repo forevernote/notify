@@ -52,7 +52,7 @@ angular.module('MainController', [])
       });
     }
   })
-  .controller('AccountController', function($scope, Post, $rootScope, Broadcast) {
+  .controller('AccountController', function($scope, Post, $rootScope, Broadcast, $timeout) {
     // List of all posts
     $scope.allPosts = [];
     // Empty object for updating post
@@ -60,24 +60,38 @@ angular.module('MainController', [])
     //
     $scope.selectedItemId = null;
 
-    // For selecting map/images/other
+
+    $scope.$on('NEWEVENTLOADED', function() {
+      $scope.viewerInclude.url = '';
+      $scope.viewerInclude.showInclude = false;
+
+    });
+
+    // For selecting map/images/other within post viewer
     $scope.viewerInclude = {
       url: '',
-      changeIncludeUrl: function(templateUrl){
-        if(templateUrl == this.url) {
-          this.showInclude  = false
-          this.url = '';
-        } else {
-          if(templateUrl == 'templates/map.html') {
-            Broadcast.emit('MAPBUTTONCLICKED', $scope.post);
+      changeIncludeUrl: function(templateUrl) {
+        if ($scope.post.location) {
+          if (templateUrl == this.url) {
+            this.showInclude = false
+            this.url = '';
+          } else {
+            this.url = templateUrl;
+            this.showInclude = true;
+            if (templateUrl == 'templates/map.html') {
+              console.log('Clicked');
+              $timeout(function(){
+                Broadcast.emit('MAPBUTTONCLICKED', $scope.post);  
+              }, 50);
+              
+            }
           }
-          this.url = templateUrl;
-          this.showInclude = true;
         }
       },
       showInclude: false
     };
 
+    // For including Media with a post
     $scope.mediaInclude = {
       url: '',
       showMediaInclude: function(templateUrl) {
@@ -130,6 +144,8 @@ angular.module('MainController', [])
       }
     };
 
+
+    // Delete Post Controls
     $scope.deletePostControls = {
       delete: function() {
         Post.deletePost($scope.post).then(function(data) {
@@ -146,7 +162,9 @@ angular.module('MainController', [])
       updateIsOpen: false,
       updateNewPost: {},
       togglePostInterface: function() {
-        this.updateIsOpen = !this.updateIsOpen;
+        if ($scope.post) {
+          this.updateIsOpen = !this.updateIsOpen;
+        }
       },
       updateThePost: function() {
         Post.updatePost($scope.post).then((data) => {
